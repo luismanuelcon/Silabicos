@@ -1,0 +1,27 @@
+.panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  background: rgba(255, 255, 255, 0.5);
+  flex-shrink: 0;
+}
+
+/* Mobile: smaller gap, 3 rows natural */
+@media (max-width: 767px) {
+  .panel {
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-md);
+  }
+}
+
+/* Desktop 1024px+: wider gap for 2 rows */
+@media (min-width: 1024px) {
+  .panel {
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-2xl);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}

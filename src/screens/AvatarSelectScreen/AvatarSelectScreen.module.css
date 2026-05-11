@@ -1,0 +1,28 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xl);
+  min-height: 100dvh;
+  padding: var(--space-lg);
+  font-family: var(--font-family);
+  color: var(--color-text-primary);
+  background-color: var(--color-cream);
+}
+
+.title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-text-primary);
+  text-align: center;
+  margin: 0;
+}
+
+.avatarGrid {
+  display: flex;
+  gap: var(--space-xl);
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}

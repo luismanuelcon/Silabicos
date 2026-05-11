@@ -1,0 +1,65 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  font-family: var(--font-family);
+  color: var(--color-text-primary);
+  background: linear-gradient(
+    135deg,
+    var(--color-selva-bg-start),
+    var(--color-selva-bg-end)
+  );
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-xl);
+  flex-shrink: 0;
+}
+
+.avatarBadge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.avatarEmoji {
+  font-size: var(--font-size-xl);
+  line-height: 1;
+}
+
+.playerName {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.worldBadge {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-selva-primary);
+  background: var(--color-white);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+}
+
+.gameZone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xl);
+  flex: 1;
+  padding: var(--space-md) var(--space-xl);
+}
+
+.buildColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  flex: 1;
+  max-width: 500px;
+}

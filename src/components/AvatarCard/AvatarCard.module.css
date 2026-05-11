@@ -1,0 +1,37 @@
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  padding: var(--space-md);
+  border: 3px solid transparent;
+  border-radius: var(--radius-full);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: box-shadow var(--duration-normal) var(--easing-smooth),
+    border-color var(--duration-normal) var(--easing-smooth);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.card:focus-visible {
+  outline: 3px solid var(--color-sky);
+  outline-offset: 2px;
+}
+
+.selected {
+  border-color: var(--color-coral);
+  box-shadow: var(--shadow-glow);
+}
+
+.avatarImage {
+  width: 80px;
+  height: 80px;
+  pointer-events: none;
+}

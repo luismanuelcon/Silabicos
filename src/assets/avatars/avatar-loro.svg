@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Loro">
+  <!-- Tail feathers -->
+  <path d="M25 75 Q15 60 20 45" fill="none" stroke="#FF6B6B" stroke-width="4" stroke-linecap="round"/>
+  <path d="M28 78 Q12 65 18 50" fill="none" stroke="#FECA57" stroke-width="3" stroke-linecap="round"/>
+  <!-- Body -->
+  <ellipse cx="50" cy="65" rx="20" ry="22" fill="#00D2D3"/>
+  <!-- Chest -->
+  <ellipse cx="50" cy="70" rx="14" ry="16" fill="#48DBFB"/>
+  <!-- Head -->
+  <circle cx="50" cy="38" r="20" fill="#00D2D3"/>
+  <!-- Crest -->
+  <path d="M45 20 Q50 8 55 20" fill="#FECA57"/>
+  <path d="M40 22 Q45 12 50 22" fill="#FF6B6B"/>
+  <!-- Eyes -->
+  <circle cx="42" cy="34" r="6" fill="#FFFFFF"/>
+  <circle cx="58" cy="34" r="6" fill="#FFFFFF"/>
+  <circle cx="43" cy="34" r="3.5" fill="#2D3436"/>
+  <circle cx="59" cy="34" r="3.5" fill="#2D3436"/>
+  <!-- Eye shine -->
+  <circle cx="44.5" cy="32.5" r="1.3" fill="#FFFFFF"/>
+  <circle cx="60.5" cy="32.5" r="1.3" fill="#FFFFFF"/>
+  <!-- Beak -->
+  <path d="M46 42 L50 50 L54 42 Z" fill="#FF6B6B"/>
+  <path d="M47 42 L50 46 L53 42 Z" fill="#FECA57"/>
+  <!-- Wing (right) -->
+  <ellipse cx="72" cy="62" rx="10" ry="16" fill="#00B894" transform="rotate(15,72,62)"/>
+  <!-- Wing (left) -->
+  <ellipse cx="28" cy="62" rx="10" ry="16" fill="#00B894" transform="rotate(-15,28,62)"/>
+  <!-- Feet -->
+  <path d="M42 86 L38 94 M42 86 L42 94 M42 86 L46 94" fill="none" stroke="#FF6B6B" stroke-width="2" stroke-linecap="round"/>
+  <path d="M58 86 L54 94 M58 86 L58 94 M58 86 L62 94" fill="none" stroke="#FF6B6B" stroke-width="2" stroke-linecap="round"/>
+</svg>

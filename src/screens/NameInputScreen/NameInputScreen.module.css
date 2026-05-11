@@ -1,0 +1,123 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
+  min-height: 100dvh;
+  padding: var(--space-lg);
+  font-family: var(--font-family);
+  color: var(--color-text-primary);
+  background-color: var(--color-cream);
+}
+
+.avatarPreview {
+  width: 80px;
+  height: 80px;
+}
+
+.title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-text-primary);
+  text-align: center;
+  margin: 0;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  width: 100%;
+  max-width: 400px;
+}
+
+.inputField {
+  width: 100%;
+  padding: var(--space-md);
+  font-family: var(--font-family);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  text-align: center;
+  background-color: var(--color-white);
+  border: 3px solid var(--color-lavender);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  outline: none;
+  transition: border-color var(--duration-normal) var(--easing-smooth),
+    box-shadow var(--duration-normal) var(--easing-smooth);
+}
+
+.inputField:focus {
+  border-color: var(--color-coral);
+  box-shadow: var(--shadow-md);
+}
+
+.inputField::placeholder {
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-regular);
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.confirmButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  min-height: var(--touch-min);
+  padding: var(--space-sm) var(--space-xl);
+  font-family: var(--font-family);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-white);
+  background-color: var(--color-coral);
+  border: none;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: transform var(--duration-normal) var(--easing-smooth),
+    box-shadow var(--duration-normal) var(--easing-smooth);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.confirmButton:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.confirmButton:active {
+  transform: scale(0.96);
+}
+
+.skipButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  min-height: var(--touch-min);
+  padding: var(--space-sm) var(--space-xl);
+  font-family: var(--font-family);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  background-color: transparent;
+  border: 2px solid var(--color-text-secondary);
+  border-radius: var(--radius-xl);
+  cursor: pointer;
+  transition: color var(--duration-normal) var(--easing-smooth),
+    border-color var(--duration-normal) var(--easing-smooth);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.skipButton:hover {
+  color: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+}

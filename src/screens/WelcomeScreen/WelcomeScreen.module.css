@@ -1,0 +1,47 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
+  min-height: 100dvh;
+  padding: var(--space-xl);
+  font-family: var(--font-family);
+  color: var(--color-text-primary);
+  background-color: var(--color-cream);
+}
+
+.avatar {
+  font-size: 5rem;
+  line-height: 1;
+}
+
+.greeting {
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-coral);
+  margin: 0;
+  text-align: center;
+}
+
+.progress {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-sky);
+  margin: 0;
+}
+
+.continueButton {
+  min-height: 48px;
+  min-width: 200px;
+  padding: var(--space-md) var(--space-xl);
+  font-family: var(--font-family);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-white);
+  background: var(--color-coral);
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+}
