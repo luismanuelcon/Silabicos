@@ -30,40 +30,43 @@ describe('DiceRoller', () => {
   it('renders with dice emoji when no syllable', () => {
     renderDice();
 
-    expect(screen.getByRole('button', { name: 'Lanzar dado' })).toBeInTheDocument();
-    expect(screen.getByText('🎲')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Tirar dado' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Dado silábico' })).toBeInTheDocument();
   });
 
   it('dispatches SET_SYLLABLE after click and animation', async () => {
     const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
     renderDice();
 
-    const dice = screen.getByRole('button', { name: 'Lanzar dado' });
-    await user.click(dice);
+    const rollButton = screen.getByRole('button', { name: 'Tirar dado' });
+    await user.click(rollButton);
 
-    // After roll (800ms) + reveal (500ms), syllable should be set
+    // After roll animation, syllable should be set
     act(() => {
-      vi.advanceTimersByTime(1400);
+      vi.advanceTimersByTime(1000);
     });
 
     // Dice should now show a syllable (uppercase 2+ chars)
-    const face = screen.getByRole('button');
-    expect(face.textContent).toMatch(/^[A-Z]{2,}$/);
+    expect(screen.getByRole('button', { name: /^Sílaba: [A-Z]{2}$/ })).toHaveAttribute(
+      'aria-disabled',
+      'true',
+    );
   });
 
   it('is disabled after syllable is set', async () => {
     const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
     renderDice();
 
-    const dice = screen.getByRole('button', { name: 'Lanzar dado' });
-    await user.click(dice);
+    const rollButton = screen.getByRole('button', { name: 'Tirar dado' });
+    await user.click(rollButton);
 
     act(() => {
-      vi.advanceTimersByTime(1400);
+      vi.advanceTimersByTime(1000);
     });
 
-    // Dice should now be disabled
-    expect(screen.getByRole('button')).toHaveAttribute(
+    // Roll button should now be disabled
+    expect(screen.getByRole('button', { name: 'Tirar dado' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: /^Sílaba: [A-Z]{2}$/ })).toHaveAttribute(
       'aria-disabled',
       'true',
     );
@@ -73,14 +76,12 @@ describe('DiceRoller', () => {
     const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
     renderDice();
 
-    await user.click(screen.getByRole('button', { name: 'Lanzar dado' }));
+    await user.click(screen.getByRole('button', { name: 'Tirar dado' }));
 
     act(() => {
-      vi.advanceTimersByTime(1400);
+      vi.advanceTimersByTime(1000);
     });
 
-    expect(screen.getByRole('button').getAttribute('aria-label')).toMatch(
-      /^Sílaba: [A-Z]{2,}$/,
-    );
+    expect(screen.getByRole('button', { name: /^Sílaba: [A-Z]{2}$/ })).toBeInTheDocument();
   });
 });
