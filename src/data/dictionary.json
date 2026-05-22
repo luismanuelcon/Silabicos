@@ -2,136 +2,258 @@
   {
     "syllable": "ma",
     "world": "selva",
+    "syllablePosition": "start",
     "words": [
       { "word": "mama", "difficulty": "easy", "imageHint": "mama" },
       { "word": "mapa", "difficulty": "easy" },
       { "word": "masa", "difficulty": "easy" },
-      { "word": "mano", "difficulty": "medium" },
-      { "word": "malo", "difficulty": "medium" },
-      { "word": "mago", "difficulty": "medium" }
+      { "word": "mano", "difficulty": "easy" }
+    ]
+  },
+  {
+    "syllable": "ma",
+    "world": "selva",
+    "syllablePosition": "end",
+    "words": [
+      { "word": "cama", "difficulty": "easy" },
+      { "word": "rama", "difficulty": "easy" },
+      { "word": "dama", "difficulty": "easy" }
     ]
   },
   {
     "syllable": "pa",
     "world": "selva",
+    "syllablePosition": "start",
     "words": [
       { "word": "papa", "difficulty": "easy", "imageHint": "papa" },
       { "word": "pala", "difficulty": "easy" },
       { "word": "pato", "difficulty": "easy" },
-      { "word": "palo", "difficulty": "medium" },
-      { "word": "paso", "difficulty": "medium" },
-      { "word": "pago", "difficulty": "medium" }
+      { "word": "paso", "difficulty": "easy" }
+    ]
+  },
+  {
+    "syllable": "pa",
+    "world": "selva",
+    "syllablePosition": "end",
+    "words": [
+      { "word": "capa", "difficulty": "easy" },
+      { "word": "sopa", "difficulty": "easy" },
+      { "word": "copa", "difficulty": "easy" }
     ]
   },
   {
     "syllable": "sa",
     "world": "selva",
+    "syllablePosition": "start",
     "words": [
       { "word": "sapo", "difficulty": "easy" },
       { "word": "sala", "difficulty": "easy" },
-      { "word": "sano", "difficulty": "medium" },
-      { "word": "saco", "difficulty": "medium" }
+      { "word": "saco", "difficulty": "easy" }
+    ]
+  },
+  {
+    "syllable": "sa",
+    "world": "selva",
+    "syllablePosition": "end",
+    "words": [
+      { "word": "casa", "difficulty": "easy" },
+      { "word": "masa", "difficulty": "easy" },
+      { "word": "mesa", "difficulty": "easy" }
     ]
   },
   {
     "syllable": "la",
     "world": "selva",
+    "syllablePosition": "start",
     "words": [
       { "word": "lago", "difficulty": "easy" },
       { "word": "lana", "difficulty": "easy" },
-      { "word": "lata", "difficulty": "medium" },
-      { "word": "lava", "difficulty": "medium" }
+      { "word": "lata", "difficulty": "easy" }
+    ]
+  },
+  {
+    "syllable": "la",
+    "world": "selva",
+    "syllablePosition": "end",
+    "words": [
+      { "word": "cola", "difficulty": "easy" },
+      { "word": "pala", "difficulty": "easy" },
+      { "word": "bola", "difficulty": "easy" }
     ]
   },
   {
     "syllable": "ca",
     "world": "selva",
+    "syllablePosition": "start",
     "words": [
       { "word": "casa", "difficulty": "easy" },
       { "word": "cama", "difficulty": "easy" },
-      { "word": "capa", "difficulty": "medium" },
-      { "word": "cana", "difficulty": "medium" }
+      { "word": "capa", "difficulty": "easy" }
+    ]
+  },
+  {
+    "syllable": "ca",
+    "world": "selva",
+    "syllablePosition": "end",
+    "words": [
+      { "word": "vaca", "difficulty": "easy" },
+      { "word": "boca", "difficulty": "easy" },
+      { "word": "foca", "difficulty": "easy" }
     ]
   },
   {
     "syllable": "ta",
     "world": "selva",
+    "syllablePosition": "start",
     "words": [
       { "word": "tapa", "difficulty": "easy" },
-      { "word": "taza", "difficulty": "easy" },
-      { "word": "taco", "difficulty": "medium" }
+      { "word": "taza", "difficulty": "easy" }
+    ]
+  },
+  {
+    "syllable": "ta",
+    "world": "selva",
+    "syllablePosition": "end",
+    "words": [
+      { "word": "pata", "difficulty": "easy" },
+      { "word": "lata", "difficulty": "easy" },
+      { "word": "rata", "difficulty": "easy" }
     ]
   },
   {
     "syllable": "na",
     "world": "selva",
+    "syllablePosition": "start",
     "words": [
       { "word": "nada", "difficulty": "easy" },
-      { "word": "nata", "difficulty": "medium" },
-      { "word": "nave", "difficulty": "medium" }
+      { "word": "nave", "difficulty": "easy" }
+    ]
+  },
+  {
+    "syllable": "na",
+    "world": "selva",
+    "syllablePosition": "end",
+    "words": [
+      { "word": "rana", "difficulty": "easy" },
+      { "word": "lana", "difficulty": "easy" },
+      { "word": "luna", "difficulty": "easy" }
     ]
   },
   {
     "syllable": "ra",
     "world": "selva",
+    "syllablePosition": "start",
     "words": [
       { "word": "rana", "difficulty": "easy" },
       { "word": "rama", "difficulty": "easy" },
-      { "word": "raro", "difficulty": "medium" }
+      { "word": "rata", "difficulty": "easy" }
     ]
   },
   {
     "syllable": "lo",
     "world": "selva",
+    "syllablePosition": "start",
     "words": [
       { "word": "loco", "difficulty": "easy" },
       { "word": "lobo", "difficulty": "easy" },
-      { "word": "lomo", "difficulty": "medium" }
+      { "word": "lodo", "difficulty": "easy" }
+    ]
+  },
+  {
+    "syllable": "lo",
+    "world": "selva",
+    "syllablePosition": "end",
+    "words": [
+      { "word": "polo", "difficulty": "easy" },
+      { "word": "palo", "difficulty": "easy" },
+      { "word": "solo", "difficulty": "easy" }
     ]
   },
   {
     "syllable": "to",
     "world": "selva",
+    "syllablePosition": "start",
     "words": [
       { "word": "topo", "difficulty": "easy" },
-      { "word": "toro", "difficulty": "easy" },
-      { "word": "toma", "difficulty": "medium" }
+      { "word": "toro", "difficulty": "easy" }
+    ]
+  },
+  {
+    "syllable": "to",
+    "world": "selva",
+    "syllablePosition": "end",
+    "words": [
+      { "word": "pato", "difficulty": "easy" },
+      { "word": "gato", "difficulty": "easy" },
+      { "word": "rato", "difficulty": "easy" }
     ]
   },
   {
     "syllable": "so",
     "world": "selva",
+    "syllablePosition": "start",
     "words": [
       { "word": "sopa", "difficulty": "easy" },
-      { "word": "solo", "difficulty": "medium" },
-      { "word": "soma", "difficulty": "hard" }
+      { "word": "solo", "difficulty": "easy" },
+      { "word": "soga", "difficulty": "easy" }
+    ]
+  },
+  {
+    "syllable": "so",
+    "world": "selva",
+    "syllablePosition": "end",
+    "words": [
+      { "word": "vaso", "difficulty": "easy" },
+      { "word": "paso", "difficulty": "easy" },
+      { "word": "oso", "difficulty": "easy" }
     ]
   },
   {
     "syllable": "co",
     "world": "selva",
+    "syllablePosition": "start",
     "words": [
       { "word": "coco", "difficulty": "easy" },
       { "word": "cola", "difficulty": "easy" },
-      { "word": "copa", "difficulty": "medium" }
-    ]
-  },
-  {
-    "syllable": "no",
-    "world": "selva",
-    "words": [
-      { "word": "nota", "difficulty": "easy" },
-      { "word": "nomo", "difficulty": "medium" },
-      { "word": "nona", "difficulty": "medium" }
+      { "word": "copa", "difficulty": "easy" }
     ]
   },
   {
     "syllable": "ro",
     "world": "selva",
+    "syllablePosition": "start",
     "words": [
       { "word": "ropa", "difficulty": "easy" },
       { "word": "roca", "difficulty": "easy" },
-      { "word": "rosa", "difficulty": "medium" }
+      { "word": "rosa", "difficulty": "easy" }
+    ]
+  },
+  {
+    "syllable": "ro",
+    "world": "selva",
+    "syllablePosition": "end",
+    "words": [
+      { "word": "toro", "difficulty": "easy" },
+      { "word": "loro", "difficulty": "easy" },
+      { "word": "coro", "difficulty": "easy" }
+    ]
+  },
+  {
+    "syllable": "po",
+    "world": "selva",
+    "syllablePosition": "end",
+    "words": [
+      { "word": "sapo", "difficulty": "easy" },
+      { "word": "topo", "difficulty": "easy" }
+    ]
+  },
+  {
+    "syllable": "ga",
+    "world": "selva",
+    "syllablePosition": "start",
+    "words": [
+      { "word": "gato", "difficulty": "easy" },
+      { "word": "gala", "difficulty": "easy" }
     ]
   }
 ]

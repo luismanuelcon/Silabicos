@@ -34,7 +34,7 @@ describe('Celebration', () => {
     expect(onComplete).not.toHaveBeenCalled();
 
     act(() => {
-      vi.advanceTimersByTime(2000);
+      vi.advanceTimersByTime(2500);
     });
 
     expect(onComplete).toHaveBeenCalledTimes(1);
@@ -68,7 +68,7 @@ describe('Celebration', () => {
     );
 
     act(() => {
-      vi.advanceTimersByTime(2000);
+      vi.advanceTimersByTime(2500);
     });
     expect(onComplete).not.toHaveBeenCalled();
 

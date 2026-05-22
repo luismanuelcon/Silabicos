@@ -13,7 +13,7 @@ function useWordValidation(): WordValidationResult {
   const { state: gameState } = useGame();
   const dictionary = useDictionary();
 
-  const { currentSyllable, placedLetters } = gameState;
+  const { currentSyllable, placedLetters, syllablePosition } = gameState;
 
   return useMemo(() => {
     if (!currentSyllable || placedLetters.length === 0) {
@@ -37,11 +37,11 @@ function useWordValidation(): WordValidationResult {
 
     const closestMatch =
       !isValid && currentWord.length >= 3
-        ? dictionary.getClosestMatch(currentWord, currentSyllable)
+        ? dictionary.getClosestMatch(currentWord, currentSyllable, syllablePosition)
         : null;
 
     return { currentWord, isValid, closestMatch };
-  }, [currentSyllable, placedLetters, dictionary]);
+  }, [currentSyllable, placedLetters, syllablePosition, dictionary]);
 }
 
 export { useWordValidation };

@@ -1,3 +1,5 @@
+import type { SyllablePosition } from './game';
+
 export type WorldId = 'selva' | 'granja' | 'oceano';
 
 export type Difficulty = 'easy' | 'medium' | 'hard';
@@ -11,15 +13,22 @@ export interface DictionaryEntry {
 export interface SyllableData {
   syllable: string;
   world: WorldId;
+  syllablePosition?: SyllablePosition;
   words: DictionaryEntry[];
 }
 
+export interface SyllableResult {
+  syllable: string;
+  position: SyllablePosition;
+}
+
 export interface DictionaryService {
-  getWordsForSyllable(syllable: string): DictionaryEntry[];
+  getWordsForSyllable(syllable: string, position?: SyllablePosition): DictionaryEntry[];
   isValidWord(word: string): boolean;
   getClosestMatch(
     partial: string,
     syllable: string,
+    position?: SyllablePosition,
   ): DictionaryEntry | null;
-  getRandomSyllable(world: WorldId): string;
+  getRandomSyllable(world: WorldId): SyllableResult;
 }

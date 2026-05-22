@@ -2,16 +2,28 @@ import type {
   DictionaryEntry,
   DictionaryService,
   SyllableData,
+  SyllableResult,
   WorldId,
 } from '../types/dictionary';
+import type { SyllablePosition } from '../types/game';
+
+interface SyllableKey {
+  syllable: string;
+  position: SyllablePosition;
+}
+
+function makeSyllableKey(syllable: string, position: SyllablePosition): string {
+  return `${syllable.toLowerCase()}:${position}`;
+}
 
 function createDictionaryService(data: SyllableData[]): DictionaryService {
   const syllableMap = new Map<string, DictionaryEntry[]>();
   const wordSet = new Set<string>();
-  const worldSyllables = new Map<WorldId, string[]>();
+  const worldSyllables = new Map<WorldId, SyllableKey[]>();
 
   for (const entry of data) {
-    const key = entry.syllable.toLowerCase();
+    const position: SyllablePosition = entry.syllablePosition ?? 'start';
+    const key = makeSyllableKey(entry.syllable, position);
     syllableMap.set(key, entry.words);
 
     for (const w of entry.words) {
@@ -19,7 +31,7 @@ function createDictionaryService(data: SyllableData[]): DictionaryService {
     }
 
     const existing = worldSyllables.get(entry.world) ?? [];
-    existing.push(key);
+    existing.push({ syllable: entry.syllable.toLowerCase(), position });
     worldSyllables.set(entry.world, existing);
   }
 
@@ -27,15 +39,16 @@ function createDictionaryService(data: SyllableData[]): DictionaryService {
     return wordSet.has(word.toLowerCase());
   }
 
-  function getWordsForSyllable(syllable: string): DictionaryEntry[] {
-    return syllableMap.get(syllable.toLowerCase()) ?? [];
+  function getWordsForSyllable(syllable: string, position: SyllablePosition = 'start'): DictionaryEntry[] {
+    return syllableMap.get(makeSyllableKey(syllable, position)) ?? [];
   }
 
   function getClosestMatch(
     partial: string,
     syllable: string,
+    position: SyllablePosition = 'start',
   ): DictionaryEntry | null {
-    const words = getWordsForSyllable(syllable);
+    const words = getWordsForSyllable(syllable, position);
     if (words.length === 0) return null;
 
     const lowerPartial = partial.toLowerCase();
@@ -55,13 +68,14 @@ function createDictionaryService(data: SyllableData[]): DictionaryService {
     return null;
   }
 
-  function getRandomSyllable(world: WorldId): string {
+  function getRandomSyllable(world: WorldId): SyllableResult {
     const syllables = worldSyllables.get(world);
     if (!syllables || syllables.length === 0) {
       throw new Error(`No syllables found for world: ${world}`);
     }
     const index = Math.floor(Math.random() * syllables.length);
-    return syllables[index];
+    const entry = syllables[index];
+    return { syllable: entry.syllable, position: entry.position };
   }
 
   return {

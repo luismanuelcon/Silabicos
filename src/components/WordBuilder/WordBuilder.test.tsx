@@ -1,4 +1,4 @@
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect } from 'vitest';
 import type { ReactNode } from 'react';
@@ -18,7 +18,7 @@ function SetSyllableHelper({ syllable }: { syllable: string }) {
   const { dispatch } = useGame();
   return (
     <button
-      onClick={() => dispatch({ type: 'SET_SYLLABLE', payload: syllable })}
+      onClick={() => dispatch({ type: 'SET_SYLLABLE', payload: { syllable, position: 'start' } })}
       data-testid="set-syllable"
     >
       Set
@@ -81,17 +81,18 @@ describe('WordBuilder', () => {
     expect(screen.getByText('MA')).toBeInTheDocument();
   });
 
-  it('shows empty slots before and after syllable', async () => {
+  it('shows empty slots after syllable (start position)', async () => {
     const user = userEvent.setup();
     renderWithHelpers('ma');
 
     await user.click(screen.getByTestId('set-syllable'));
 
-    const beforeSlots = screen.getAllByLabelText(/Espacio antes de sílaba/);
     const afterSlots = screen.getAllByLabelText(/Espacio después de sílaba/);
-
-    expect(beforeSlots.length).toBeGreaterThan(0);
     expect(afterSlots.length).toBeGreaterThan(0);
+
+    // No before slots when syllable is at start
+    const beforeSlots = screen.queryAllByLabelText(/Espacio antes de sílaba/);
+    expect(beforeSlots.length).toBe(0);
   });
 
   it('shows placed letters and allows removal', async () => {
@@ -109,9 +110,11 @@ describe('WordBuilder', () => {
     // Click to remove
     await user.click(placedLetter);
 
-    expect(
-      screen.queryByLabelText('Letra colocada a, toca para quitar'),
-    ).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(
+        screen.queryByLabelText('Letra colocada a, toca para quitar'),
+      ).not.toBeInTheDocument();
+    });
   });
 
   it('syllable cannot be removed', async () => {

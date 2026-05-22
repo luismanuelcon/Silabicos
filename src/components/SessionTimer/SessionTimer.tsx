@@ -66,8 +66,13 @@ function SessionTimer({ durationSeconds, active, onTimeUp }: SessionTimerProps) 
       aria-valuemax={100}
       aria-valuenow={Math.round(progress * 100)}
     >
-      {/* Sky arc path indicator */}
-      <div className={styles.arc} aria-hidden="true" />
+      {/* SVG arc path indicator */}
+      <svg className={styles.arc} viewBox="0 0 200 80" aria-hidden="true">
+        <path
+          className={styles.arcPath}
+          d="M 20 70 A 80 60 0 0 1 180 70"
+        />
+      </svg>
 
       {/* Sun */}
       <div

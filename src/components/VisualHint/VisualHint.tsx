@@ -52,14 +52,32 @@ function VisualHint({ match }: VisualHintProps) {
           className={styles.hint}
           role="status"
           aria-label="Pista visual"
-          initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.8 }}
-          transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.3 }}
+          initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.3, y: 10 }}
+          animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
+          exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.5, y: -10 }}
+          transition={shouldReduceMotion ? { duration: 0 } : {
+            type: 'spring',
+            stiffness: 400,
+            damping: 15,
+            mass: 0.8,
+          }}
         >
-          <span className={styles.icon} aria-hidden="true">
+          <motion.span
+            className={styles.icon}
+            aria-hidden="true"
+            animate={shouldReduceMotion ? {} : {
+              rotate: [0, -5, 5, -3, 0],
+              scale: [1, 1.1, 1],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              repeatDelay: 3,
+              ease: 'easeInOut',
+            }}
+          >
             {icon}
-          </span>
+          </motion.span>
         </motion.div>
       )}
     </AnimatePresence>

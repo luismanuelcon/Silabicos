@@ -41,9 +41,9 @@ describe('DiceRoller', () => {
     const dice = screen.getByRole('button', { name: 'Lanzar dado' });
     await user.click(dice);
 
-    // After animation timeout (800ms), syllable should be set
+    // After roll (800ms) + reveal (500ms), syllable should be set
     act(() => {
-      vi.advanceTimersByTime(900);
+      vi.advanceTimersByTime(1400);
     });
 
     // Dice should now show a syllable (uppercase 2+ chars)
@@ -59,7 +59,7 @@ describe('DiceRoller', () => {
     await user.click(dice);
 
     act(() => {
-      vi.advanceTimersByTime(900);
+      vi.advanceTimersByTime(1400);
     });
 
     // Dice should now be disabled
@@ -76,7 +76,7 @@ describe('DiceRoller', () => {
     await user.click(screen.getByRole('button', { name: 'Lanzar dado' }));
 
     act(() => {
-      vi.advanceTimersByTime(900);
+      vi.advanceTimersByTime(1400);
     });
 
     expect(screen.getByRole('button').getAttribute('aria-label')).toMatch(

@@ -5,10 +5,74 @@
   font-family: var(--font-family);
   color: var(--color-text-primary);
   background: linear-gradient(
-    135deg,
+    to bottom,
     var(--color-selva-bg-start),
     var(--color-selva-bg-end)
   );
+  position: relative;
+  overflow: hidden;
+}
+
+.atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.vine {
+  position: absolute;
+  top: -16px;
+  width: 16px;
+  border-radius: var(--radius-full);
+  background: rgba(0, 106, 101, 0.2);
+  animation: floatVine 5s ease-in-out infinite;
+  transform-origin: top;
+}
+
+.vineLeft {
+  left: 10px;
+  height: 200px;
+}
+
+.vineRight {
+  right: 20px;
+  height: 260px;
+  animation-delay: -1.5s;
+  width: 12px;
+  background: rgba(0, 106, 101, 0.15);
+}
+
+.vineLeaf {
+  position: absolute;
+  border-radius: var(--radius-full);
+  background: var(--color-selva-primary);
+}
+
+.flowerLeft {
+  position: absolute;
+  bottom: 40px;
+  left: 10px;
+  font-size: 3rem;
+  animation: breathing 3.5s ease-in-out infinite;
+}
+
+.flowerRight {
+  position: absolute;
+  bottom: 80px;
+  right: 10px;
+  font-size: 3.5rem;
+  animation: breathing 3.5s ease-in-out infinite;
+  animation-delay: -1s;
+}
+
+.leafDecor {
+  position: absolute;
+  top: 25%;
+  right: 5px;
+  font-size: 2.5rem;
+  opacity: 0.3;
 }
 
 .header {
@@ -17,6 +81,8 @@
   justify-content: space-between;
   padding: var(--space-md) var(--space-xl);
   flex-shrink: 0;
+  position: relative;
+  z-index: 10;
 }
 
 .avatarBadge {
@@ -53,6 +119,8 @@
   gap: var(--space-xl);
   flex: 1;
   padding: var(--space-md) var(--space-xl);
+  position: relative;
+  z-index: 10;
 }
 
 .buildColumn {
@@ -61,5 +129,31 @@
   align-items: center;
   gap: var(--space-md);
   flex: 1;
-  max-width: 500px;
+  max-width: 600px;
+}
+
+@keyframes floatVine {
+  0%, 100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes breathing {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vine,
+  .flowerLeft,
+  .flowerRight {
+    animation: none;
+  }
 }

@@ -10,6 +10,13 @@ interface LetterTileProps {
 
 const EASING_SMOOTH = [0.4, 0, 0.2, 1] as const;
 
+const RETURN_SPRING = {
+  type: 'spring' as const,
+  stiffness: 400,
+  damping: 25,
+  mass: 0.8,
+};
+
 function LetterTile({ letter, onDragStart, onDragEnd }: LetterTileProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -82,7 +89,7 @@ function LetterTile({ letter, onDragStart, onDragEnd }: LetterTileProps) {
           ? {
               x: offset.x,
               y: offset.y,
-              scale: 1.1,
+              scale: 1.15,
               rotate: randomRotate.current,
             }
           : { x: 0, y: 0, scale: 1, rotate: 0 }
@@ -90,7 +97,7 @@ function LetterTile({ letter, onDragStart, onDragEnd }: LetterTileProps) {
       transition={
         isDragging
           ? { duration: 0 }
-          : { duration: 0.3, ease: [...EASING_SMOOTH] }
+          : RETURN_SPRING
       }
       style={isDragging ? { zIndex: 100 } : undefined}
     >

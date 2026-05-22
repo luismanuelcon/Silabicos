@@ -9,24 +9,46 @@
   font-family: var(--font-family);
   color: var(--color-text-primary);
   background-color: var(--color-cream);
+  position: relative;
+  overflow: hidden;
+}
+
+.screen::before {
+  content: '🌟';
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  font-size: 3rem;
+  animation: starBounce 1.5s ease-in-out infinite alternate;
+  transform: rotate(-12deg);
+}
+
+.screen::after {
+  content: '⭐';
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  font-size: 3rem;
+  animation: starBounce 1.5s 0.3s ease-in-out infinite alternate;
+  transform: rotate(12deg);
 }
 
 .avatarCelebrate {
-  font-size: 4rem;
+  font-size: 5rem;
   line-height: 1;
 }
 
 .title {
   font-size: var(--font-size-display);
   font-weight: var(--font-weight-extrabold);
-  color: var(--color-coral);
+  color: var(--color-primary);
   margin: 0;
 }
 
 .wordCount {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
-  color: var(--color-sky);
+  color: var(--color-secondary);
   margin: 0;
 }
 
@@ -38,7 +60,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-sm);
-  max-width: 400px;
+  max-width: 500px;
 }
 
 .wordItem {
@@ -48,7 +70,8 @@
   background: var(--color-white);
   padding: var(--space-sm) var(--space-md);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
+  border-bottom: 3px solid var(--color-surface-dim);
+  box-shadow: var(--shadow-toy);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
 }
@@ -63,26 +86,56 @@
 }
 
 .playAgainButton {
-  min-height: 48px;
-  min-width: 200px;
+  min-height: 56px;
+  min-width: 220px;
   padding: var(--space-md) var(--space-xl);
   font-family: var(--font-family);
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-extrabold);
-  color: var(--color-white);
-  background: var(--color-coral);
+  color: var(--color-on-primary);
+  background: var(--color-primary);
   border: none;
+  border-bottom: 6px solid #8c1520;
   border-radius: var(--radius-full);
   cursor: pointer;
-  box-shadow: var(--shadow-md);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: var(--shadow-toy);
+  transition: all 0.3s var(--easing-cartoon-spring);
+  animation: pulseInviting 2s ease-in-out infinite;
 }
 
 .playAgainButton:hover {
-  transform: scale(1.05);
+  transform: scale(1.05) translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
 
 .playAgainButton:active {
-  transform: scale(0.97);
+  transform: scale(0.97) translateY(3px);
+  border-bottom-width: 2px;
+  box-shadow: var(--shadow-toy-pressed);
+}
+
+@keyframes starBounce {
+  0% { transform: rotate(-12deg) scale(1); }
+  100% { transform: rotate(12deg) scale(1.2); }
+}
+
+@keyframes pulseInviting {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: var(--shadow-toy);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.1), 0 12px 24px rgba(174, 47, 52, 0.2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen::before,
+  .screen::after {
+    animation: none;
+  }
+  .playAgainButton {
+    animation: none;
+  }
 }

@@ -4,15 +4,21 @@
   justify-content: center;
   width: var(--touch-dice);
   height: var(--touch-dice);
-  background: var(--color-white);
-  border: 3px solid var(--color-coral);
+  background: var(--color-primary-container);
+  border: none;
+  border-bottom: 8px solid #8c1520;
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-toy);
   cursor: pointer;
   user-select: none;
   outline: none;
   transform-style: preserve-3d;
   flex-shrink: 0;
+  position: relative;
+}
+
+.dice:not(.disabled):not(.rolling) {
+  animation: diceIdle 3s ease-in-out infinite;
 }
 
 .dice:focus-visible {
@@ -21,29 +27,63 @@
 }
 
 .dice:hover:not(.disabled) {
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-glow-gold);
+}
+
+.dice:active:not(.disabled) {
+  border-bottom-width: 4px;
+  transform: translateY(4px);
+  box-shadow: var(--shadow-toy-pressed);
 }
 
 .disabled {
   cursor: default;
   opacity: 0.7;
-  border-color: var(--color-text-secondary);
+  border-color: var(--color-outline-variant);
+  background: var(--color-surface-container-high);
+  animation: none !important;
+}
+
+.rolling {
+  animation: none !important;
+}
+
+.revealing {
+  animation: none !important;
+  box-shadow: 0 0 30px 10px rgba(255, 230, 109, 0.6), var(--shadow-toy);
+  border-color: #d4a017;
+  background: linear-gradient(135deg, var(--color-primary-container), #ffe66d);
 }
 
 .face {
   font-family: var(--font-family);
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-extrabold);
-  color: var(--color-coral);
+  color: var(--color-white);
   line-height: 1;
   pointer-events: none;
 }
 
-/* Responsive: 64px on mobile */
+.volumeHint {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 32px;
+  height: 32px;
+  background: var(--color-white);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  font-size: 1rem;
+}
+
+/* Responsive: 96px on mobile */
 @media (max-width: 767px) {
   .dice {
-    width: 64px;
-    height: 64px;
+    width: 96px;
+    height: 96px;
   }
 
   .face {
@@ -51,10 +91,31 @@
   }
 }
 
-/* Large: 100px on desktop */
+/* Large: 132px on desktop */
 @media (min-width: 1024px) {
   .dice {
-    width: 100px;
-    height: 100px;
+    width: 132px;
+    height: 132px;
+  }
+
+  .face {
+    font-size: var(--font-size-display);
+  }
+}
+
+@keyframes diceIdle {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+    filter: drop-shadow(0 0 5px rgba(255, 230, 109, 0));
+  }
+  50% {
+    transform: rotate(3deg) scale(1.02);
+    filter: drop-shadow(0 0 15px rgba(255, 230, 109, 0.8));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dice:not(.disabled):not(.rolling) {
+    animation: none;
   }
 }

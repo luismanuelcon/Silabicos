@@ -9,6 +9,8 @@
   font-family: var(--font-family);
   color: var(--color-text-primary);
   background-color: var(--color-cream);
+  position: relative;
+  overflow: hidden;
 }
 
 .title {
@@ -17,12 +19,24 @@
   color: var(--color-text-primary);
   text-align: center;
   margin: 0;
+  animation: titleBreathe 4s ease-in-out infinite;
 }
 
 .avatarGrid {
   display: flex;
-  gap: var(--space-xl);
+  gap: var(--space-2xl);
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+}
+
+@keyframes titleBreathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .title {
+    animation: none;
+  }
 }

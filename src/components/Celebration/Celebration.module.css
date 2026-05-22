@@ -6,7 +6,8 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-lg);
-  background: rgba(255, 248, 240, 0.9);
+  background: rgba(255, 248, 247, 0.92);
+  backdrop-filter: blur(4px);
   z-index: 200;
   pointer-events: none;
 }
@@ -26,10 +27,15 @@
 
 .wordReveal {
   font-family: var(--font-family);
-  font-size: var(--font-size-3xl);
+  font-size: var(--font-size-display);
   font-weight: var(--font-weight-extrabold);
-  color: var(--color-coral);
-  text-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+  color: var(--color-primary);
+  text-shadow: 0 4px 12px rgba(174, 47, 52, 0.3);
+  z-index: 1;
+}
+
+.avatarCelebrate {
+  font-size: 5rem;
   z-index: 1;
 }
 
@@ -41,15 +47,44 @@
 .flash {
   position: absolute;
   inset: 0;
-  background: rgba(254, 202, 87, 0.3);
-  animation: flashPulse 500ms ease-out;
+  background: radial-gradient(circle, rgba(255, 230, 109, 0.4) 0%, transparent 70%);
+  animation: flashPulse 600ms ease-out;
+}
+
+.stars {
+  position: absolute;
+  font-size: 3rem;
+  z-index: 1;
+}
+
+.starLeft {
+  top: 20%;
+  left: 15%;
+  animation: starBounce 0.8s var(--easing-bounce) infinite alternate;
+}
+
+.starRight {
+  top: 20%;
+  right: 15%;
+  animation: starBounce 0.8s 0.3s var(--easing-bounce) infinite alternate;
 }
 
 @keyframes flashPulse {
   0% {
     opacity: 1;
+    transform: scale(0.8);
   }
   100% {
     opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes starBounce {
+  0% {
+    transform: rotate(-12deg) scale(1);
+  }
+  100% {
+    transform: rotate(12deg) scale(1.2);
   }
 }

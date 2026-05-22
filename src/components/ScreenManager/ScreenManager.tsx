@@ -27,17 +27,17 @@ function ScreenManager() {
   const { currentScreen, direction } = state;
   const ScreenComponent = SCREEN_COMPONENTS[currentScreen];
 
-  const slideOffset = direction === 'forward' ? 20 : -20;
-  const duration = shouldReduceMotion ? 0 : 0.3;
+  const slideOffset = direction === 'forward' ? 40 : -40;
+  const duration = shouldReduceMotion ? 0 : 0.4;
 
   return (
     <AnimatePresence mode="wait">
       <motion.div
         key={currentScreen}
         className={styles.screenWrapper}
-        initial={{ opacity: 0, x: slideOffset }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: -slideOffset }}
+        initial={{ opacity: 0, x: slideOffset, scale: 0.96 }}
+        animate={{ opacity: 1, x: 0, scale: 1 }}
+        exit={{ opacity: 0, x: -slideOffset, scale: 0.96 }}
         transition={{ duration, ease: [...EASING_SMOOTH] }}
       >
         <ScreenComponent />

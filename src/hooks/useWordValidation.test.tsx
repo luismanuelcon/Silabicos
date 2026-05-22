@@ -43,7 +43,7 @@ describe('useWordValidation', () => {
     act(() => {
       result.current.dispatch({
         type: 'SET_SYLLABLE',
-        payload: 'ma',
+        payload: { syllable: 'ma', position: 'start' },
       });
     });
     // Add "m" and "a" after syllable → "ma" + "ma" = "mama"
@@ -76,7 +76,7 @@ describe('useWordValidation', () => {
     act(() => {
       result.current.dispatch({
         type: 'SET_SYLLABLE',
-        payload: 'ma',
+        payload: { syllable: 'ma', position: 'start' },
       });
     });
     // Add "n" after syllable → "man" — not a valid word but prefix of "mano"
@@ -103,7 +103,7 @@ describe('useWordValidation', () => {
     act(() => {
       result.current.dispatch({
         type: 'SET_SYLLABLE',
-        payload: 'ma',
+        payload: { syllable: 'ma', position: 'start' },
       });
     });
     // Add "x", "z", "q" → "maxzq" — no match

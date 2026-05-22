@@ -19,6 +19,7 @@ describe('GameContext', () => {
 
     expect(result.current.state).toEqual({
       currentSyllable: null,
+      syllablePosition: 'start',
       placedLetters: [],
       completedWords: [],
       round: 0,
@@ -52,10 +53,11 @@ describe('GameContext', () => {
       });
     });
     act(() => {
-      result.current.dispatch({ type: 'SET_SYLLABLE', payload: 'ma' });
+      result.current.dispatch({ type: 'SET_SYLLABLE', payload: { syllable: 'ma', position: 'start' } });
     });
 
     expect(result.current.state.currentSyllable).toBe('ma');
+    expect(result.current.state.syllablePosition).toBe('start');
     expect(result.current.state.placedLetters).toEqual([]);
   });
 
@@ -103,7 +105,7 @@ describe('GameContext', () => {
       result.current.dispatch({ type: 'START_SESSION', payload: 'selva' });
     });
     act(() => {
-      result.current.dispatch({ type: 'SET_SYLLABLE', payload: 'ma' });
+      result.current.dispatch({ type: 'SET_SYLLABLE', payload: { syllable: 'ma', position: 'start' } });
     });
     act(() => {
       result.current.dispatch({ type: 'COMPLETE_WORD', payload: 'mama' });
@@ -119,7 +121,7 @@ describe('GameContext', () => {
     const { result } = renderHook(() => useGame(), { wrapper });
 
     act(() => {
-      result.current.dispatch({ type: 'SET_SYLLABLE', payload: 'pa' });
+      result.current.dispatch({ type: 'SET_SYLLABLE', payload: { syllable: 'pa', position: 'start' } });
     });
     act(() => {
       result.current.dispatch({

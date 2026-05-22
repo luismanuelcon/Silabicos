@@ -14,7 +14,7 @@
 .greeting {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
-  color: var(--color-lavender);
+  color: var(--color-tertiary);
   margin: 0;
 }
 
@@ -27,7 +27,7 @@
 
 .grid {
   display: flex;
-  gap: var(--space-lg);
+  gap: var(--space-xl);
   flex-wrap: wrap;
   justify-content: center;
 }

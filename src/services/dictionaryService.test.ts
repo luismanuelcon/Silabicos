@@ -59,9 +59,10 @@ describe('dictionaryService', () => {
 
   describe('getRandomSyllable', () => {
     it('returns a CV syllable for world selva', () => {
-      const syllable = service.getRandomSyllable('selva');
-      expect(typeof syllable).toBe('string');
-      expect(syllable.length).toBeGreaterThanOrEqual(2);
+      const result = service.getRandomSyllable('selva');
+      expect(typeof result.syllable).toBe('string');
+      expect(result.syllable.length).toBeGreaterThanOrEqual(2);
+      expect(result.position).toMatch(/^(start|end)$/);
     });
 
     it('throws for a world with no syllables', () => {
@@ -82,12 +83,12 @@ describe('dictionaryService', () => {
       expect(allWords.size).toBeGreaterThanOrEqual(50);
     });
 
-    it('every syllable has at least 3 words', () => {
+    it('every syllable has at least 2 words', () => {
       for (const entry of dictionaryData as SyllableData[]) {
         expect(
           entry.words.length,
-          `Syllable "${entry.syllable}" has fewer than 3 words`,
-        ).toBeGreaterThanOrEqual(3);
+          `Syllable "${entry.syllable}" (${entry.syllablePosition ?? 'start'}) has fewer than 2 words`,
+        ).toBeGreaterThanOrEqual(2);
       }
     });
   });

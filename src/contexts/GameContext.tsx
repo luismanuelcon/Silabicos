@@ -3,6 +3,7 @@ import type { GameState, GameAction } from '../types/game';
 
 const initialState: GameState = {
   currentSyllable: null,
+  syllablePosition: 'start',
   placedLetters: [],
   completedWords: [],
   round: 0,
@@ -21,7 +22,8 @@ function gameReducer(state: GameState, action: GameAction): GameState {
     case 'SET_SYLLABLE':
       return {
         ...state,
-        currentSyllable: action.payload,
+        currentSyllable: action.payload.syllable,
+        syllablePosition: action.payload.position,
         placedLetters: [],
       };
     case 'ADD_LETTER':
