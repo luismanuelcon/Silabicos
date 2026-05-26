@@ -23,14 +23,39 @@ export interface DiceRollProfile {
   shadowImpactOpacity: number;
 }
 
-const FACE_ORIENTATIONS: DiceOrientation[] = [
-  { x: 0, y: 0, z: 0 },
-  { x: 0, y: -180, z: 0 },
-  { x: 0, y: -90, z: 0 },
-  { x: 0, y: 90, z: 0 },
-  { x: -90, y: 0, z: 0 },
-  { x: 90, y: 0, z: 0 },
+/**
+ * Base orientations to bring each face forward.
+ * These are the "mathematical" orientations before cartoon rest tilt is applied.
+ */
+const FACE_BASE: DiceOrientation[] = [
+  { x: 0, y: 0, z: 0 }, // front
+  { x: 0, y: -180, z: 0 }, // back
+  { x: 0, y: -90, z: 0 }, // right
+  { x: 0, y: 90, z: 0 }, // left
+  { x: -90, y: 0, z: 0 }, // top
+  { x: 90, y: 0, z: 0 }, // bottom
 ];
+
+/**
+ * Asymmetric "cartoon rest tilt" per face — ensures the cube never looks
+ * perfectly perpendicular to the camera. The winning face stays dominant
+ * and legible but adjacent faces are always visible for volume perception.
+ * Values are intentionally large (14-20°) to guarantee 3D perception at rest.
+ */
+const REST_TILT: DiceOrientation[] = [
+  { x: 14, y: -18, z: -4 }, // front: tilt back + turn left → shows top + right
+  { x: -12, y: 16, z: 5 }, // back: shows top + left
+  { x: 15, y: -14, z: -3 }, // right: shows top + front
+  { x: -13, y: 17, z: 4 }, // left: shows top + front
+  { x: 12, y: -16, z: -5 }, // top: shows front + right
+  { x: -14, y: 18, z: 3 }, // bottom: shows front + right
+];
+
+const FACE_ORIENTATIONS: DiceOrientation[] = FACE_BASE.map((base, i) => ({
+  x: base.x + REST_TILT[i].x,
+  y: base.y + REST_TILT[i].y,
+  z: base.z + REST_TILT[i].z,
+}));
 
 function randomBetween(min: number, max: number): number {
   return Math.random() * (max - min) + min;
@@ -117,10 +142,12 @@ export function createDiceRollProfile(
     z: jitter(target.z + randomBetween(-10, 10)),
   };
 
+  // Randomized micro-offsets so the cube never lands identically twice.
+  // Keeps the winning face dominant but adds organic imperfection.
   const end = {
-    x: target.x,
-    y: target.y,
-    z: target.z,
+    x: target.x + randomBetween(-4, 4),
+    y: target.y + randomBetween(-4, 4),
+    z: target.z + randomBetween(-2.5, 2.5),
   };
 
   return {
