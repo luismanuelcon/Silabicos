@@ -1,18 +1,25 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { useReducedMotion } from 'framer-motion';
 import { useGame } from '../../contexts/GameContext';
+import {
+  DiceCube3D,
+  createDiceRollProfile,
+  getFaceOrientation,
+  type DiceRollProfile,
+  type DiceOrientation,
+} from '../DiceCube3D';
 import styles from './DiceRoller.module.css';
 
 const DICE_DURATION_MS = 900;
 
 const FACE_SYLLABLES = ['ma', 'pa', 'sa', 'la', 'ca', 'ta'] as const;
 const FACE_CLASSES = [
-  'showFront',
-  'showBack',
-  'showRight',
-  'showLeft',
-  'showTop',
-  'showBottom',
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
 ] as const;
 
 function DiceRoller() {
@@ -20,9 +27,19 @@ function DiceRoller() {
   const shouldReduceMotion = useReducedMotion();
   const [rolling, setRolling] = useState(false);
   const [selectedSyllable, setSelectedSyllable] = useState('');
-  const [rotationClass, setRotationClass] = useState<string>(styles.showFront);
+  const [orientation, setOrientation] = useState<DiceOrientation>(getFaceOrientation(0));
+  const [rollProfile, setRollProfile] = useState<DiceRollProfile | null>(null);
+  const timerRef = useRef<number | null>(null);
 
   const isDisabled = gameState.currentSyllable !== null || rolling;
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current !== null) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, []);
 
   const handleRoll = useCallback(() => {
     if (isDisabled) {
@@ -31,66 +48,54 @@ function DiceRoller() {
 
     const randomIndex = Math.floor(Math.random() * FACE_SYLLABLES.length);
     const syllable = FACE_SYLLABLES[randomIndex];
-    const faceClass = styles[FACE_CLASSES[randomIndex]];
+    const faceIndex = FACE_CLASSES[randomIndex];
+    const nextOrientation = getFaceOrientation(faceIndex);
 
     if (shouldReduceMotion) {
-      setRotationClass(faceClass);
+      setOrientation(nextOrientation);
       setSelectedSyllable(syllable.toUpperCase());
       dispatch({ type: 'SET_SYLLABLE', payload: { syllable, position: 'start' } });
       return;
     }
 
+    const profile = createDiceRollProfile(orientation, nextOrientation, DICE_DURATION_MS);
+
+    if (timerRef.current !== null) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+
+    setRollProfile(profile);
     setRolling(true);
     setSelectedSyllable('');
 
-    setTimeout(() => {
-      setRotationClass(faceClass);
+    timerRef.current = window.setTimeout(() => {
+      setOrientation(nextOrientation);
       setSelectedSyllable(syllable.toUpperCase());
       dispatch({ type: 'SET_SYLLABLE', payload: { syllable, position: 'start' } });
       setRolling(false);
-    }, DICE_DURATION_MS);
-  }, [isDisabled, shouldReduceMotion, dispatch]);
-
-  function handleKeyDown(event: React.KeyboardEvent) {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      handleRoll();
-    }
-  }
+      setRollProfile(null);
+      timerRef.current = null;
+    }, profile.durationMs);
+  }, [isDisabled, shouldReduceMotion, dispatch, orientation]);
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.scene}>
-        <div
-          className={[
-            styles.dice,
-            rotationClass,
-            rolling ? styles.rolling : '',
-            isDisabled ? styles.disabled : '',
-          ].filter(Boolean).join(' ')}
-          role="button"
-          tabIndex={isDisabled ? -1 : 0}
-          aria-label={
-            rolling
-              ? 'Lanzando dado...'
-              : selectedSyllable
-                ? `Sílaba: ${selectedSyllable}`
-                : 'Dado silábico'
-          }
-          aria-disabled={isDisabled}
-          onClick={handleRoll}
-          onKeyDown={handleKeyDown}
-        >
-          <div className={styles.faceLight} aria-hidden="true" />
-          <div className={`${styles.face} ${styles.faceFront}`}>ma</div>
-          <div className={`${styles.face} ${styles.faceBack}`}>pa</div>
-          <div className={`${styles.face} ${styles.faceRight}`}>sa</div>
-          <div className={`${styles.face} ${styles.faceLeft}`}>la</div>
-          <div className={`${styles.face} ${styles.faceTop}`}>ca</div>
-          <div className={`${styles.face} ${styles.faceBottom}`}>ta</div>
-        </div>
-        <div className={`${styles.shadow} ${rolling ? styles.shadowRolling : ''}`} aria-hidden="true" />
-      </div>
+      <DiceCube3D
+        faces={[...FACE_SYLLABLES]}
+        orientation={orientation}
+        rolling={rolling}
+        disabled={isDisabled}
+        rollProfile={rollProfile}
+        label={
+          rolling
+            ? 'Lanzando dado...'
+            : selectedSyllable
+              ? `Sílaba: ${selectedSyllable}`
+              : 'Dado silábico'
+        }
+        onRoll={handleRoll}
+      />
 
       <button
         type="button"

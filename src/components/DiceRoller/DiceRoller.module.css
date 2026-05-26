@@ -5,232 +5,39 @@
   gap: var(--space-md);
 }
 
-.scene {
-  width: 130px;
-  height: 130px;
-  perspective: 900px;
-  position: relative;
-}
-
-.dice {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 620ms cubic-bezier(0.18, 0.8, 0.24, 1.02);
-  will-change: transform;
-  cursor: pointer;
-  outline: none;
-  filter: drop-shadow(0 8px 10px rgba(46, 46, 63, 0.14));
-}
-
-.face {
-  position: absolute;
-  width: 130px;
-  height: 130px;
-  border-radius: 28px;
-  border: 4px solid #ffffff;
-  box-shadow:
-    inset 0 -8px 12px rgba(110, 97, 128, 0.18),
-    inset 0 8px 12px rgba(255, 255, 255, 0.42),
-    0 10px 18px rgba(72, 62, 100, 0.16);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-family);
-  font-size: clamp(2rem, 6vw, 2.8rem);
-  font-weight: 900;
-  color: #24304a;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
-  text-transform: lowercase;
-  user-select: none;
-  backface-visibility: hidden;
-  overflow: hidden;
-}
-
-.face::before {
-  content: '';
-  position: absolute;
-  inset: 6px;
-  border-radius: 20px;
-  background: radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.55), transparent 58%);
-  pointer-events: none;
-}
-
-.face::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0));
-  pointer-events: none;
-}
-
-.faceLight {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 30px;
-  background: radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.2), transparent 65%);
-  transform: translateZ(70px);
-  pointer-events: none;
-}
-
-.faceFront {
-  background: linear-gradient(165deg, #ffd8b8, #ffc4b8);
-  transform: rotateY(0deg) translateZ(65px);
-}
-
-.faceBack {
-  background: linear-gradient(165deg, #ffe9b5, #ffd59e);
-  transform: rotateY(180deg) translateZ(65px);
-}
-
-.faceRight {
-  background: linear-gradient(165deg, #d3f8d4, #b5efc2);
-  transform: rotateY(90deg) translateZ(65px);
-}
-
-.faceLeft {
-  background: linear-gradient(165deg, #cde8ff, #b7d8ff);
-  transform: rotateY(-90deg) translateZ(65px);
-}
-
-.faceTop {
-  background: linear-gradient(165deg, #ddd0ff, #c7b8ff);
-  transform: rotateX(90deg) translateZ(65px);
-}
-
-.faceBottom {
-  background: linear-gradient(165deg, #ffd6e9, #ffc1da);
-  transform: rotateX(-90deg) translateZ(65px);
-}
-
-.showFront {
-  transform: rotateX(0deg) rotateY(0deg);
-}
-
-.showBack {
-  transform: rotateY(-180deg);
-}
-
-.showRight {
-  transform: rotateY(-90deg);
-}
-
-.showLeft {
-  transform: rotateY(90deg);
-}
-
-.showTop {
-  transform: rotateX(-90deg);
-}
-
-.showBottom {
-  transform: rotateX(90deg);
-}
-
-.rolling {
-  animation: rollDice 920ms cubic-bezier(0.18, 0.84, 0.2, 1);
-}
-
-@keyframes rollDice {
-  0% {
-    transform: translateY(0) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1, 1);
-  }
-
-  16% {
-    transform: translateY(-12px) rotateX(120deg) rotateY(90deg) rotateZ(6deg) scale(0.97, 1.03);
-  }
-
-  36% {
-    transform: translateY(-20px) rotateX(280deg) rotateY(210deg) rotateZ(-8deg) scale(0.95, 1.05);
-  }
-
-  60% {
-    transform: translateY(-8px) rotateX(490deg) rotateY(390deg) rotateZ(4deg) scale(1.02, 0.98);
-  }
-
-  78% {
-    transform: translateY(3px) rotateX(660deg) rotateY(520deg) rotateZ(-2deg) scale(1.04, 0.96);
-  }
-
-  90% {
-    transform: translateY(-2px) rotateX(705deg) rotateY(535deg) rotateZ(1deg) scale(0.99, 1.01);
-  }
-
-  100% {
-    transform: translateY(0) rotateX(720deg) rotateY(540deg) rotateZ(0deg) scale(1, 1);
-  }
-}
-
-.shadow {
-  position: absolute;
-  left: 50%;
-  bottom: -18px;
-  width: 82px;
-  height: 20px;
-  transform: translateX(-50%);
-  border-radius: 999px;
-  background: radial-gradient(ellipse at center, rgba(30, 34, 58, 0.28), rgba(30, 34, 58, 0.03) 70%);
-  filter: blur(2px);
-  will-change: transform, opacity;
-}
-
-.shadowRolling {
-  animation: shadowBounce 920ms cubic-bezier(0.18, 0.84, 0.2, 1);
-}
-
-@keyframes shadowBounce {
-  0% {
-    transform: translateX(-50%) scale(1, 1);
-    opacity: 0.33;
-  }
-
-  36% {
-    transform: translateX(-50%) scale(0.62, 0.78);
-    opacity: 0.2;
-  }
-
-  78% {
-    transform: translateX(-50%) scale(1.16, 1.08);
-    opacity: 0.38;
-  }
-
-  100% {
-    transform: translateX(-50%) scale(1, 1);
-    opacity: 0.33;
-  }
-}
-
 .rollButton {
   border: none;
   border-radius: 999px;
   padding: 12px 24px;
-  background: linear-gradient(180deg, #8695ff, #6878f7);
+  background: linear-gradient(180deg, #7f95ff, #6178f2 68%, #546be8);
   color: #fff;
   font-family: var(--font-family);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
-  box-shadow: 0 8px 18px rgba(96, 112, 247, 0.32);
+  box-shadow:
+    0 8px 18px rgba(77, 100, 236, 0.34),
+    inset 0 2px 0 rgba(255, 255, 255, 0.26);
   cursor: pointer;
   transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
-  will-change: transform;
+  will-change: transform, filter;
 }
 
 .rollButton:hover:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow: 0 10px 20px rgba(96, 112, 247, 0.36);
-  filter: brightness(1.03);
+  transform: translateY(-1px) scale(1.01);
+  box-shadow:
+    0 10px 22px rgba(77, 100, 236, 0.38),
+    inset 0 2px 0 rgba(255, 255, 255, 0.28);
+  filter: brightness(1.04);
 }
 
 .rollButton:active:not(:disabled) {
   transform: translateY(1px) scale(0.98);
-  box-shadow: 0 5px 10px rgba(96, 112, 247, 0.26);
+  box-shadow:
+    0 5px 10px rgba(77, 100, 236, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-.rollButton:disabled,
-.disabled {
+.rollButton:disabled {
   opacity: 0.72;
   cursor: not-allowed;
 }
@@ -243,64 +50,8 @@
   color: var(--color-text-primary);
 }
 
-@media (max-width: 767px) {
-  .scene {
-    width: 102px;
-    height: 102px;
-  }
-
-  .face {
-    width: 102px;
-    height: 102px;
-    border-radius: 22px;
-    font-size: 1.9rem;
-  }
-
-  .face::before {
-    border-radius: 16px;
-  }
-
-  .faceLight {
-    border-radius: 24px;
-  }
-
-  .faceFront {
-    transform: rotateY(0deg) translateZ(51px);
-  }
-
-  .faceBack {
-    transform: rotateY(180deg) translateZ(51px);
-  }
-
-  .faceRight {
-    transform: rotateY(90deg) translateZ(51px);
-  }
-
-  .faceLeft {
-    transform: rotateY(-90deg) translateZ(51px);
-  }
-
-  .faceTop {
-    transform: rotateX(90deg) translateZ(51px);
-  }
-
-  .faceBottom {
-    transform: rotateX(-90deg) translateZ(51px);
-  }
-
-  .shadow {
-    width: 66px;
-    height: 16px;
-    bottom: -14px;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .dice,
-  .rolling,
-  .shadowRolling,
   .rollButton {
-    animation: none !important;
     transition-duration: 0ms !important;
   }
 }

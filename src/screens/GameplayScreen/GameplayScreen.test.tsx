@@ -31,7 +31,7 @@ describe('GameplayScreen', () => {
   it('renders the gameplay zones', () => {
     renderScreen();
 
-    expect(screen.getByRole('button', { name: 'Lanzar dado' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Tirar dado' })).toBeInTheDocument();
     expect(
       screen.getByLabelText('Zona de construcción'),
     ).toBeInTheDocument();

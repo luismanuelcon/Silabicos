@@ -1,11 +1,19 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
+import {
+  DiceCube3D,
+  createDiceRollProfile,
+  getFaceOrientation,
+  type DiceOrientation,
+  type DiceRollProfile,
+} from '../DiceCube3D';
 import styles from './SilabcDice.module.css';
 
 interface DiceState {
   rolling: boolean;
   selectedSyllable: string;
-  rotationClass: string;
+  orientation: DiceOrientation;
+  rollProfile: DiceRollProfile | null;
 }
 
 export interface SilabcDiceResult {
@@ -23,12 +31,12 @@ interface SilabcDiceProps {
 }
 
 const FACE_CLASSES = [
-  'showFront',
-  'showBack',
-  'showRight',
-  'showLeft',
-  'showTop',
-  'showBottom',
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
 ] as const;
 
 function normalizeSyllables(source?: string[]): string[] {
@@ -61,9 +69,18 @@ function SilabcDice({
     Array.from({ length: safeDiceCount }, () => ({
       rolling: false,
       selectedSyllable: '',
-      rotationClass: styles.showFront,
+      orientation: getFaceOrientation(0),
+      rollProfile: null,
     })),
   );
+  const timeoutByDiceRef = useRef<Record<number, number>>({});
+
+  useEffect(() => {
+    return () => {
+      Object.values(timeoutByDiceRef.current).forEach((timeoutId) => clearTimeout(timeoutId));
+      timeoutByDiceRef.current = {};
+    };
+  }, []);
 
   useEffect(() => {
     setDiceStates((previous) =>
@@ -73,7 +90,8 @@ function SilabcDice({
           current ?? {
             rolling: false,
             selectedSyllable: '',
-            rotationClass: styles.showFront,
+            orientation: getFaceOrientation(0),
+            rollProfile: null,
           }
         );
       }),
@@ -98,24 +116,15 @@ function SilabcDice({
   }
 
   function rollSingleDice(diceIndex: number) {
-    setDiceStates((previous) => {
-      const current = previous[diceIndex];
-      if (!current || current.rolling) {
-        return previous;
-      }
-
-      const updated = [...previous];
-      updated[diceIndex] = {
-        ...current,
-        rolling: true,
-        selectedSyllable: '',
-      };
-      return updated;
-    });
+    const currentState = diceStates[diceIndex];
+    if (!currentState || currentState.rolling) {
+      return;
+    }
 
     const randomIndex = Math.floor(Math.random() * normalizedSyllables.length);
     const syllable = normalizedSyllables[randomIndex];
-    const rotationClass = styles[FACE_CLASSES[randomIndex]];
+    const faceIndex = FACE_CLASSES[randomIndex];
+    const targetOrientation = getFaceOrientation(faceIndex);
 
     if (shouldReduceMotion) {
       setDiceStates((previous) => {
@@ -128,7 +137,8 @@ function SilabcDice({
           ...current,
           rolling: false,
           selectedSyllable: syllable.toUpperCase(),
-          rotationClass,
+          orientation: targetOrientation,
+          rollProfile: null,
         };
 
         diceResultSelected?.({ diceIndex, syllable: syllable.toUpperCase() });
@@ -138,7 +148,31 @@ function SilabcDice({
       return;
     }
 
-    setTimeout(() => {
+    const profile = createDiceRollProfile(currentState.orientation, targetOrientation, rollDurationMs);
+
+    setDiceStates((previous) => {
+      const updated = [...previous];
+      const current = updated[diceIndex];
+      if (!current) {
+        return previous;
+      }
+
+      updated[diceIndex] = {
+        ...current,
+        rolling: true,
+        selectedSyllable: '',
+        rollProfile: profile,
+      };
+
+      return updated;
+    });
+
+    if (timeoutByDiceRef.current[diceIndex]) {
+      clearTimeout(timeoutByDiceRef.current[diceIndex]);
+      delete timeoutByDiceRef.current[diceIndex];
+    }
+
+    timeoutByDiceRef.current[diceIndex] = window.setTimeout(() => {
       setDiceStates((previous) => {
         const updated = [...previous];
         const current = updated[diceIndex];
@@ -150,14 +184,16 @@ function SilabcDice({
           ...current,
           rolling: false,
           selectedSyllable: syllable.toUpperCase(),
-          rotationClass,
+          orientation: targetOrientation,
+          rollProfile: null,
         };
 
         diceResultSelected?.({ diceIndex, syllable: syllable.toUpperCase() });
         emitAggregatedIfReady(updated);
         return updated;
       });
-    }, rollDurationMs);
+      delete timeoutByDiceRef.current[diceIndex];
+    }, profile.durationMs);
   }
 
   function rollDice(diceIndex?: number) {
@@ -188,33 +224,15 @@ function SilabcDice({
         {diceStates.map((state, index) => (
           <div key={index} className={styles.diceCard}>
             <div className={styles.scene}>
-              <div
-                className={[
-                  styles.dice,
-                  state.rotationClass,
-                  state.rolling ? styles.rolling : '',
-                ].filter(Boolean).join(' ')}
-                role="button"
-                tabIndex={state.rolling ? -1 : 0}
-                aria-disabled={state.rolling}
-                aria-label={state.selectedSyllable ? `Sílaba: ${state.selectedSyllable}` : 'Dado silábico'}
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    rollDice(index);
-                  }
-                }}
-                onClick={() => rollDice(index)}
-              >
-                <div className={styles.faceLight} aria-hidden="true" />
-                <div className={`${styles.face} ${styles.faceFront}`}>{normalizedSyllables[0]}</div>
-                <div className={`${styles.face} ${styles.faceBack}`}>{normalizedSyllables[1]}</div>
-                <div className={`${styles.face} ${styles.faceRight}`}>{normalizedSyllables[2]}</div>
-                <div className={`${styles.face} ${styles.faceLeft}`}>{normalizedSyllables[3]}</div>
-                <div className={`${styles.face} ${styles.faceTop}`}>{normalizedSyllables[4]}</div>
-                <div className={`${styles.face} ${styles.faceBottom}`}>{normalizedSyllables[5]}</div>
-              </div>
-              <div className={`${styles.shadow} ${state.rolling ? styles.shadowRolling : ''}`} aria-hidden="true" />
+              <DiceCube3D
+                faces={normalizedSyllables}
+                orientation={state.orientation}
+                rolling={state.rolling}
+                disabled={state.rolling}
+                rollProfile={state.rollProfile}
+                label={state.selectedSyllable ? `Sílaba: ${state.selectedSyllable}` : 'Dado silábico'}
+                onRoll={() => rollDice(index)}
+              />
             </div>
 
             {safeDiceCount > 1 && (
