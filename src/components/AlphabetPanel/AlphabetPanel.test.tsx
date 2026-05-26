@@ -20,11 +20,11 @@ describe('AlphabetPanel', () => {
     expect(tiles).toHaveLength(27);
   });
 
-  it('includes Ñ in the alphabet', () => {
+  it('includes ñ in the alphabet', () => {
     render(<AlphabetPanel />);
 
     expect(
-      screen.getByRole('button', { name: 'Letra Ñ' }),
+      screen.getByRole('button', { name: 'Letra ñ' }),
     ).toBeInTheDocument();
   });
 

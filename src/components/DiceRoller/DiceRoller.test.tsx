@@ -41,13 +41,13 @@ describe('DiceRoller', () => {
     const rollButton = screen.getByRole('button', { name: 'Tirar dado' });
     await user.click(rollButton);
 
-    // After roll animation, syllable should be set
+    // After roll animation (2-3s), syllable should be set
     act(() => {
-      vi.advanceTimersByTime(1000);
+      vi.advanceTimersByTime(3500);
     });
 
-    // Dice should now show a syllable (uppercase 2+ chars)
-    expect(screen.getByRole('button', { name: /^Sílaba: [A-Z]{2}$/ })).toHaveAttribute(
+    // Dice should now show a syllable (lowercase 2 chars)
+    expect(screen.getByRole('button', { name: /^Sílaba: [a-z]{2}$/ })).toHaveAttribute(
       'aria-disabled',
       'true',
     );
@@ -61,12 +61,12 @@ describe('DiceRoller', () => {
     await user.click(rollButton);
 
     act(() => {
-      vi.advanceTimersByTime(1000);
+      vi.advanceTimersByTime(3500);
     });
 
     // Roll button should now be disabled
     expect(screen.getByRole('button', { name: 'Tirar dado' })).toBeDisabled();
-    expect(screen.getByRole('button', { name: /^Sílaba: [A-Z]{2}$/ })).toHaveAttribute(
+    expect(screen.getByRole('button', { name: /^Sílaba: [a-z]{2}$/ })).toHaveAttribute(
       'aria-disabled',
       'true',
     );
@@ -79,9 +79,9 @@ describe('DiceRoller', () => {
     await user.click(screen.getByRole('button', { name: 'Tirar dado' }));
 
     act(() => {
-      vi.advanceTimersByTime(1000);
+      vi.advanceTimersByTime(3500);
     });
 
-    expect(screen.getByRole('button', { name: /^Sílaba: [A-Z]{2}$/ })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /^Sílaba: [a-z]{2}$/ })).toBeInTheDocument();
   });
 });

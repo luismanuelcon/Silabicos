@@ -10,7 +10,7 @@ import {
 } from '../DiceCube3D';
 import styles from './DiceRoller.module.css';
 
-const DICE_DURATION_MS = 900;
+const DICE_DURATION_MS = 2500;
 
 const FACE_SYLLABLES = ['ma', 'pa', 'sa', 'la', 'ca', 'ta'] as const;
 const FACE_CLASSES = [
@@ -53,7 +53,7 @@ function DiceRoller() {
 
     if (shouldReduceMotion) {
       setOrientation(nextOrientation);
-      setSelectedSyllable(syllable.toUpperCase());
+      setSelectedSyllable(syllable);
       dispatch({ type: 'SET_SYLLABLE', payload: { syllable, position: 'start' } });
       return;
     }
@@ -71,7 +71,7 @@ function DiceRoller() {
 
     timerRef.current = window.setTimeout(() => {
       setOrientation(nextOrientation);
-      setSelectedSyllable(syllable.toUpperCase());
+      setSelectedSyllable(syllable);
       dispatch({ type: 'SET_SYLLABLE', payload: { syllable, position: 'start' } });
       setRolling(false);
       setRollProfile(null);

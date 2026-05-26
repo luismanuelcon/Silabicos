@@ -24,31 +24,38 @@ export interface DiceRollProfile {
 }
 
 /**
- * Base orientations to bring each face forward.
- * These are the "mathematical" orientations before cartoon rest tilt is applied.
+ * Base orientations that rotate the cube so face N ends up on TOP.
+ * Like a real dice on a table — the upper face is the result.
+ *
+ * Face normals in cube local space:
+ *   face0 (front): +Z  → needs Rx(90°) to point -Y (up)
+ *   face1 (back):  -Z  → needs Rx(-90°)
+ *   face2 (right): +X  → needs Rz(-90°)
+ *   face3 (left):  -X  → needs Rz(90°)
+ *   face4 (top):   -Y  → already up (identity)
+ *   face5 (bottom):+Y  → needs Rx(180°)
  */
 const FACE_BASE: DiceOrientation[] = [
-  { x: 0, y: 0, z: 0 }, // front
-  { x: 0, y: -180, z: 0 }, // back
-  { x: 0, y: -90, z: 0 }, // right
-  { x: 0, y: 90, z: 0 }, // left
-  { x: -90, y: 0, z: 0 }, // top
-  { x: 90, y: 0, z: 0 }, // bottom
+  { x: 90, y: 0, z: 0 }, // face0 (front) → top
+  { x: -90, y: 0, z: 0 }, // face1 (back) → top
+  { x: 0, y: 0, z: -90 }, // face2 (right) → top
+  { x: 0, y: 0, z: 90 }, // face3 (left) → top
+  { x: 0, y: 0, z: 0 }, // face4 (top) → already top
+  { x: 180, y: 0, z: 0 }, // face5 (bottom) → top
 ];
 
 /**
- * Asymmetric "cartoon rest tilt" per face — ensures the cube never looks
- * perfectly perpendicular to the camera. The winning face stays dominant
- * and legible but adjacent faces are always visible for volume perception.
- * Values are intentionally large (14-20°) to guarantee 3D perception at rest.
+ * Asymmetric "cartoon rest tilt" — keeps the top face clearly visible
+ * from the camera above, but adds imperfection for 3D perception.
+ * Values are moderate (8-14°) since the steep camera already guarantees depth.
  */
 const REST_TILT: DiceOrientation[] = [
-  { x: 14, y: -18, z: -4 }, // front: tilt back + turn left → shows top + right
-  { x: -12, y: 16, z: 5 }, // back: shows top + left
-  { x: 15, y: -14, z: -3 }, // right: shows top + front
-  { x: -13, y: 17, z: 4 }, // left: shows top + front
-  { x: 12, y: -16, z: -5 }, // top: shows front + right
-  { x: -14, y: 18, z: 3 }, // bottom: shows front + right
+  { x: 8, y: -12, z: -3 },
+  { x: -6, y: 10, z: 4 },
+  { x: 7, y: -14, z: -2 },
+  { x: -8, y: 11, z: 3 },
+  { x: 10, y: -10, z: -4 },
+  { x: -7, y: 13, z: 2 },
 ];
 
 const FACE_ORIENTATIONS: DiceOrientation[] = FACE_BASE.map((base, i) => ({
@@ -83,7 +90,7 @@ function normalizeAxis(x: number, y: number, z: number): [number, number, number
 }
 
 function clampDuration(durationMs: number): number {
-  return Math.round(Math.max(760, Math.min(1280, durationMs)));
+  return Math.round(Math.max(2000, Math.min(3200, durationMs)));
 }
 
 function createSpinAmount(baseTurns: number, extraTurns: number): number {
@@ -114,9 +121,9 @@ export function createDiceRollProfile(
     randomBetween(0.1, 0.9),
   );
 
-  const spinX = createSpinAmount(2, 2);
-  const spinY = createSpinAmount(2, 3);
-  const spinZ = createSpinAmount(1, 2) * 0.65;
+  const spinX = createSpinAmount(3, 3);
+  const spinY = createSpinAmount(3, 4);
+  const spinZ = createSpinAmount(2, 2) * 0.65;
 
   const prep = {
     x: jitter(start.x + randomBetween(-4, 4)),
@@ -155,9 +162,9 @@ export function createDiceRollProfile(
     axisX,
     axisY,
     axisZ,
-    launchHeightPx: randomBetween(62, 110),
-    impactDepthPx: randomBetween(10, 20),
-    maxBlurPx: randomBetween(1.4, 2.8),
+    launchHeightPx: randomBetween(80, 140),
+    impactDepthPx: randomBetween(12, 24),
+    maxBlurPx: randomBetween(1.8, 3.2),
     prep,
     launch,
     fall,
