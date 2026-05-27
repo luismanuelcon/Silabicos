@@ -68,7 +68,7 @@ function Celebration({ word, onComplete, variant = 'word-complete', wordsCount }
     : `¡Muy bien! Formaste ${word}`;
   const displayText = isSessionEnd
     ? `🏆 ¡${wordsCount ?? 0} palabras!`
-    : word.toUpperCase();
+    : word.toLowerCase();
 
   if (shouldReduceMotion) {
     return (

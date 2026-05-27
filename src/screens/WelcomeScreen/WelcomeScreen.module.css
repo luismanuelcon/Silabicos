@@ -8,7 +8,7 @@
   padding: var(--space-xl);
   font-family: var(--font-family);
   color: var(--color-text-primary);
-  background-color: var(--color-cream);
+  background: radial-gradient(ellipse at top, #2e2e4a 0%, #1a1a2e 70%);
 }
 
 .avatar {
@@ -40,9 +40,9 @@
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-extrabold);
   color: var(--color-on-primary);
-  background: var(--color-primary);
+  background: linear-gradient(135deg, #e53935 0%, #fb8c00 100%);
   border: none;
-  border-bottom: 6px solid #8c1520;
+  border-bottom: 6px solid #9e1a1a;
   border-radius: var(--radius-full);
   cursor: pointer;
   box-shadow: var(--shadow-toy);
@@ -74,7 +74,7 @@
   }
   50% {
     transform: scale(1.03);
-    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.1), 0 12px 24px rgba(174, 47, 52, 0.2);
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.3), 0 12px 24px rgba(229, 57, 53, 0.3);
   }
 }
 

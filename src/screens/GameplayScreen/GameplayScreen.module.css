@@ -5,9 +5,10 @@
   font-family: var(--font-family);
   color: var(--color-text-primary);
   background: linear-gradient(
-    to bottom,
-    var(--color-selva-bg-start),
-    var(--color-selva-bg-end)
+    160deg,
+    #1a1a2e 0%,
+    #2a2a44 40%,
+    #1e1e32 100%
   );
   position: relative;
   overflow: hidden;
@@ -26,7 +27,7 @@
   top: -16px;
   width: 16px;
   border-radius: var(--radius-full);
-  background: rgba(0, 106, 101, 0.2);
+  background: rgba(67, 160, 71, 0.15);
   animation: floatVine 5s ease-in-out infinite;
   transform-origin: top;
 }
@@ -41,13 +42,13 @@
   height: 260px;
   animation-delay: -1.5s;
   width: 12px;
-  background: rgba(0, 106, 101, 0.15);
+  background: rgba(67, 160, 71, 0.1);
 }
 
 .vineLeaf {
   position: absolute;
   border-radius: var(--radius-full);
-  background: var(--color-selva-primary);
+  background: var(--color-green);
 }
 
 .flowerLeft {
@@ -72,7 +73,7 @@
   top: 25%;
   right: 5px;
   font-size: 2.5rem;
-  opacity: 0.3;
+  opacity: 0.2;
 }
 
 .header {
@@ -105,11 +106,12 @@
 .worldBadge {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
-  color: var(--color-selva-primary);
-  background: var(--color-white);
+  color: var(--color-yellow);
+  background: var(--color-surface-light);
   padding: var(--space-xs) var(--space-md);
   border-radius: var(--radius-full);
   box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-outline);
 }
 
 .gameZone {

@@ -128,7 +128,7 @@ function WordBuilder({ isDragging = false }: WordBuilderProps) {
       {/* Anchored syllable */}
       <motion.div
         className={styles.syllable}
-        aria-label={`Sílaba anclada: ${currentSyllable.toUpperCase()}`}
+        aria-label={`Sílaba anclada: ${currentSyllable.toLowerCase()}`}
         initial={shouldReduceMotion ? false : { scale: 0, opacity: 0, y: -20 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         transition={
@@ -138,7 +138,7 @@ function WordBuilder({ isDragging = false }: WordBuilderProps) {
         }
       >
         <span className={styles.syllableText}>
-          {currentSyllable.toUpperCase()}
+          {currentSyllable.toLowerCase()}
         </span>
         <span className={styles.fixedIndicator} aria-hidden="true">
           ⚓

@@ -136,12 +136,12 @@ function SilabcDice({
         updated[diceIndex] = {
           ...current,
           rolling: false,
-          selectedSyllable: syllable.toUpperCase(),
+          selectedSyllable: syllable.toLowerCase(),
           orientation: targetOrientation,
           rollProfile: null,
         };
 
-        diceResultSelected?.({ diceIndex, syllable: syllable.toUpperCase() });
+        diceResultSelected?.({ diceIndex, syllable: syllable.toLowerCase() });
         emitAggregatedIfReady(updated);
         return updated;
       });
@@ -183,12 +183,12 @@ function SilabcDice({
         updated[diceIndex] = {
           ...current,
           rolling: false,
-          selectedSyllable: syllable.toUpperCase(),
+          selectedSyllable: syllable.toLowerCase(),
           orientation: targetOrientation,
           rollProfile: null,
         };
 
-        diceResultSelected?.({ diceIndex, syllable: syllable.toUpperCase() });
+        diceResultSelected?.({ diceIndex, syllable: syllable.toLowerCase() });
         emitAggregatedIfReady(updated);
         return updated;
       });

@@ -9,14 +9,14 @@
   border: none;
   border-radius: 999px;
   padding: 12px 24px;
-  background: linear-gradient(180deg, #7f95ff, #6178f2 68%, #546be8);
+  background: linear-gradient(180deg, #ff5252, #e53935 68%, #c62828);
   color: #fff;
   font-family: var(--font-family);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
   box-shadow:
-    0 8px 18px rgba(77, 100, 236, 0.34),
-    inset 0 2px 0 rgba(255, 255, 255, 0.26);
+    0 8px 18px rgba(229, 57, 53, 0.34),
+    inset 0 2px 0 rgba(255, 255, 255, 0.2);
   cursor: pointer;
   transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
   will-change: transform, filter;
@@ -25,16 +25,16 @@
 .rollButton:hover:not(:disabled) {
   transform: translateY(-1px) scale(1.01);
   box-shadow:
-    0 10px 22px rgba(77, 100, 236, 0.38),
-    inset 0 2px 0 rgba(255, 255, 255, 0.28);
-  filter: brightness(1.04);
+    0 10px 22px rgba(229, 57, 53, 0.42),
+    inset 0 2px 0 rgba(255, 255, 255, 0.24);
+  filter: brightness(1.06);
 }
 
 .rollButton:active:not(:disabled) {
   transform: translateY(1px) scale(0.98);
   box-shadow:
-    0 5px 10px rgba(77, 100, 236, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    0 5px 10px rgba(229, 57, 53, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
 .rollButton:disabled {

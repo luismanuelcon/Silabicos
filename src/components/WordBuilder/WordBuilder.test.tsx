@@ -76,9 +76,9 @@ describe('WordBuilder', () => {
     await user.click(screen.getByTestId('set-syllable'));
 
     expect(
-      screen.getByLabelText('Sílaba anclada: MA'),
+      screen.getByLabelText('Sílaba anclada: ma'),
     ).toBeInTheDocument();
-    expect(screen.getByText('MA')).toBeInTheDocument();
+    expect(screen.getByText('ma')).toBeInTheDocument();
   });
 
   it('shows empty slots after syllable (start position)', async () => {
@@ -123,7 +123,7 @@ describe('WordBuilder', () => {
 
     await user.click(screen.getByTestId('set-syllable'));
 
-    const syllable = screen.getByLabelText('Sílaba anclada: MA');
+    const syllable = screen.getByLabelText('Sílaba anclada: ma');
     // Syllable has no click handler for removal — it stays put
     expect(syllable).toBeInTheDocument();
     // No role="button" on syllable (it's a plain div)

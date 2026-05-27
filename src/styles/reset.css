@@ -16,7 +16,7 @@ body {
   font-family: var(--font-family);
   font-size: var(--font-size-md);
   color: var(--color-text-primary);
-  background-color: var(--color-cream);
+  background: radial-gradient(circle at top, #40406b 0%, #1c1c2d 60%);
   line-height: 1.5;
   min-height: 100dvh;
 }

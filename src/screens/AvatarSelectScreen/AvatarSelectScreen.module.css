@@ -8,7 +8,7 @@
   padding: var(--space-lg);
   font-family: var(--font-family);
   color: var(--color-text-primary);
-  background-color: var(--color-cream);
+  background: radial-gradient(ellipse at top, #2e2e4a 0%, #1a1a2e 70%);
   position: relative;
   overflow: hidden;
 }

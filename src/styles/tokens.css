@@ -1,46 +1,61 @@
 :root {
-  /* Paleta principal */
-  --color-cream: #FFF8F7;
-  --color-coral: #FF6B6B;
-  --color-mint: #00D2D3;
-  --color-lavender: #A29BFE;
-  --color-sun: #FECA57;
-  --color-sky: #48DBFB;
-  --color-gold-glow: #FFE66D;
+  /* =========================
+     PALETA MARIO KART
+  ========================== */
+  --color-red: #e53935;
+  --color-blue: #1976d2;
+  --color-yellow: #fbc02d;
+  --color-green: #43a047;
+  --color-orange: #fb8c00;
 
-  /* Material-inspired surfaces */
-  --color-surface: #FFF8F7;
-  --color-surface-container: #FFE9E7;
-  --color-surface-container-high: #FBE3E1;
-  --color-surface-container-highest: #F5DDDB;
-  --color-surface-container-low: #FFF0EF;
-  --color-surface-dim: #ECD5D3;
+  /* Surfaces (dark theme) */
+  --color-dark: #1e1e2f;
+  --color-surface: #2a2a40;
+  --color-surface-light: #343454;
+  --color-surface-container: #2a2a40;
+  --color-surface-container-high: #343454;
+  --color-surface-container-highest: #3e3e5e;
+  --color-surface-container-low: #232338;
+  --color-surface-dim: #1a1a2a;
 
-  /* Accent colors */
-  --color-primary: #AE2F34;
-  --color-primary-container: #FF6B6B;
-  --color-secondary: #006A65;
-  --color-secondary-container: #79F3EA;
-  --color-tertiary: #5952AF;
-  --color-tertiary-container: #9790F2;
+  /* Text */
+  --color-text-primary: #f5f5f5;
+  --color-text-secondary: #c5c5d1;
+  --color-text-muted: #8a8aa0;
+  --color-white: #ffffff;
+  --color-on-primary: #ffffff;
 
-  /* Neutrales */
-  --color-text-primary: #251818;
-  --color-text-secondary: #584140;
-  --color-outline: #8C706F;
-  --color-outline-variant: #E0BFBD;
-  --color-white: #FFFFFF;
-  --color-on-primary: #FFFFFF;
+  /* Accents */
+  --color-primary: #e53935;
+  --color-primary-container: #e53935;
+  --color-secondary: #1976d2;
+  --color-secondary-container: #42a5f5;
+  --color-tertiary: #fbc02d;
+  --color-tertiary-container: #fbc02d;
 
-  /* Mundo Selva */
-  --color-selva-primary: #006A65;
-  --color-selva-secondary: #55A630;
-  --color-selva-accent: #FFE66D;
-  --color-selva-bg-start: #E0F2F1;
-  --color-selva-bg-end: #FFF8F7;
+  /* Borders */
+  --color-outline: #4b4b6a;
+  --color-outline-variant: #5a5a7a;
+  --color-border: #4b4b6a;
 
-  /* Tipografía */
-  --font-family: 'Nunito', sans-serif;
+  /* Legacy aliases for compatibility */
+  --color-cream: #1e1e2f;
+  --color-coral: #e53935;
+  --color-mint: #43a047;
+  --color-lavender: #7c4dff;
+  --color-sun: #fbc02d;
+  --color-sky: #42a5f5;
+  --color-gold-glow: #fbc02d;
+  --color-selva-primary: #43a047;
+  --color-selva-secondary: #66bb6a;
+  --color-selva-accent: #fbc02d;
+  --color-selva-bg-start: #1e1e2f;
+  --color-selva-bg-end: #2a2a40;
+
+  /* =========================
+     TIPOGRAFÍA
+  ========================== */
+  --font-family: 'Fredoka', sans-serif;
   --font-size-xs: 0.75rem;
   --font-size-sm: 1rem;
   --font-size-md: 1.25rem;
@@ -49,11 +64,13 @@
   --font-size-2xl: 2.5rem;
   --font-size-3xl: 3rem;
   --font-size-display: 4.5rem;
-  --font-weight-regular: 600;
-  --font-weight-bold: 800;
-  --font-weight-extrabold: 900;
+  --font-weight-regular: 500;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
 
-  /* Spacing (base 8px) */
+  /* =========================
+     SPACING
+  ========================== */
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
@@ -62,23 +79,27 @@
   --space-2xl: 48px;
   --space-3xl: 64px;
 
-  /* Border radius */
+  /* =========================
+     BORDER RADIUS
+  ========================== */
   --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  --radius-xl: 32px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
   --radius-full: 9999px;
 
-  /* Toy-like shadows (with bottom depth) */
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
-  --shadow-toy: 0 4px 0 rgba(0, 0, 0, 0.1), 0 8px 16px rgba(174, 47, 52, 0.1);
-  --shadow-toy-pressed: 0 2px 0 rgba(0, 0, 0, 0.1);
-  --shadow-glow: 0 0 20px rgba(255, 107, 107, 0.4);
-  --shadow-glow-gold: 0 0 20px rgba(255, 230, 109, 0.8);
-  --shadow-drag: 0 12px 32px rgba(0, 0, 0, 0.2);
-  --shadow-inset-slot: inset 0 4px 8px rgba(0, 0, 0, 0.05);
+  /* =========================
+     SHADOWS (dark theme)
+  ========================== */
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 12px 30px rgba(0, 0, 0, 0.4);
+  --shadow-toy: 0 5px 0 rgba(0, 0, 0, 0.28);
+  --shadow-toy-pressed: 0 2px 0 rgba(0, 0, 0, 0.28);
+  --shadow-glow: 0 0 20px rgba(229, 57, 53, 0.4);
+  --shadow-glow-gold: 0 0 20px rgba(251, 192, 45, 0.6);
+  --shadow-drag: 0 12px 32px rgba(0, 0, 0, 0.4);
+  --shadow-inset-slot: inset 0 4px 8px rgba(0, 0, 0, 0.2);
 
   /* Touch targets */
   --touch-min: 48px;
@@ -86,13 +107,15 @@
   --touch-letter: 64px;
   --touch-dice: 120px;
 
-  /* Breakpoints (referencia — usar valores en media queries) */
+  /* Breakpoints */
   --bp-mobile: 568px;
   --bp-tablet: 768px;
   --bp-optimal: 1024px;
   --bp-desktop: 1440px;
 
-  /* Timing */
+  /* =========================
+     TIMING
+  ========================== */
   --duration-fast: 100ms;
   --duration-normal: 200ms;
   --duration-slow: 300ms;

@@ -11,11 +11,11 @@ describe('Celebration', () => {
     vi.useRealTimers();
   });
 
-  it('renders word in uppercase', () => {
+  it('renders word in lowercase', () => {
     const onComplete = vi.fn();
     render(<Celebration word="mama" onComplete={onComplete} />);
 
-    expect(screen.getByText('MAMA')).toBeInTheDocument();
+    expect(screen.getByText('mama')).toBeInTheDocument();
   });
 
   it('shows celebration alert', () => {
