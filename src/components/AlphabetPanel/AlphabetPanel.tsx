@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { LetterTile } from '../LetterTile/LetterTile';
 import styles from './AlphabetPanel.module.css';
 
@@ -23,7 +23,7 @@ const containerVariants = {
   },
 };
 
-const letterVariants = {
+const letterVariants: Variants = {
   hidden: { opacity: 0, y: 20, scale: 0.8 },
   visible: {
     opacity: 1,

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import type { ReactNode } from 'react';
 import { WorldSelectScreen } from './WorldSelectScreen';
 import { NavigationProvider } from '../../contexts/NavigationContext';

@@ -8,8 +8,6 @@ interface LetterTileProps {
   onDragEnd?: (letter: string, x: number, y: number) => void;
 }
 
-const EASING_SMOOTH = [0.4, 0, 0.2, 1] as const;
-
 const RETURN_SPRING = {
   type: 'spring' as const,
   stiffness: 400,

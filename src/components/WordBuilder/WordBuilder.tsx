@@ -6,8 +6,6 @@ import styles from './WordBuilder.module.css';
 const MAX_LETTERS_BEFORE = 2;
 const MAX_LETTERS_AFTER = 2;
 
-const EASING_BOUNCE = [0.34, 1.56, 0.64, 1] as const;
-
 interface WordBuilderProps {
   isDragging?: boolean;
 }
