@@ -78,10 +78,19 @@ function createDictionaryService(data: SyllableData[]): DictionaryService {
     return { syllable: entry.syllable, position: entry.position };
   }
 
+  function getSyllablesForWorld(world: WorldId): SyllableResult[] {
+    const syllables = worldSyllables.get(world) ?? [];
+    return syllables.map((entry) => ({
+      syllable: entry.syllable,
+      position: entry.position,
+    }));
+  }
+
   return {
     isValidWord,
     getWordsForSyllable,
     getClosestMatch,
+    getSyllablesForWorld,
     getRandomSyllable,
   };
 }

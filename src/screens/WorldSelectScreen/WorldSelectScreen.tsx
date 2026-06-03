@@ -32,7 +32,7 @@ function WorldSelectScreen() {
         />
         <WorldCard
           worldId="granja"
-          locked={true}
+          locked={false}
           onSelect={handleSelectWorld}
           label="Granja"
         />

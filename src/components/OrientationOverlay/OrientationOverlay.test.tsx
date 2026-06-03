@@ -22,14 +22,14 @@ describe('OrientationOverlay', () => {
     });
   });
 
-  it('does not render when in landscape orientation', () => {
+  it('does not render in landscape orientation', () => {
     render(<OrientationOverlay />);
     expect(
       screen.queryByText('¡Gira tu dispositivo!'),
     ).not.toBeInTheDocument();
   });
 
-  it('renders overlay when in portrait orientation', () => {
+  it('does not render in portrait orientation', () => {
     matchMediaMock.mockImplementation((query: string) => ({
       matches: query === '(orientation: portrait)',
       media: query,
@@ -42,6 +42,8 @@ describe('OrientationOverlay', () => {
     }));
 
     render(<OrientationOverlay />);
-    expect(screen.getByText('¡Gira tu dispositivo!')).toBeInTheDocument();
+    expect(
+      screen.queryByText('¡Gira tu dispositivo!'),
+    ).not.toBeInTheDocument();
   });
 });

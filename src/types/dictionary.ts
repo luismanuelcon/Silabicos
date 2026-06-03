@@ -30,5 +30,6 @@ export interface DictionaryService {
     syllable: string,
     position?: SyllablePosition,
   ): DictionaryEntry | null;
+  getSyllablesForWorld(world: WorldId): SyllableResult[];
   getRandomSyllable(world: WorldId): SyllableResult;
 }

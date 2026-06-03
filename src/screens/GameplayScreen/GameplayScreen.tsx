@@ -18,6 +18,18 @@ const AVATAR_LABELS: Record<string, string> = {
   rana: '🐸',
 };
 
+const WORLD_LABELS = {
+  selva: 'Selva',
+  granja: 'Granja',
+  oceano: 'Océano',
+} as const;
+
+const WORLD_EMOJIS = {
+  selva: '🌴',
+  granja: '🌾',
+  oceano: '🌊',
+} as const;
+
 const SESSION_DURATION_SECONDS = 180;
 
 function GameplayScreen() {
@@ -127,7 +139,7 @@ function GameplayScreen() {
           )}
         </motion.div>
         <div className={styles.worldBadge}>
-          🌴 Selva — Ronda {gameState.round + 1}
+          {WORLD_EMOJIS[gameState.selectedWorld]} {WORLD_LABELS[gameState.selectedWorld]} — Ronda {gameState.round + 1}
         </div>
       </header>
 
@@ -141,6 +153,7 @@ function GameplayScreen() {
         <DiceRoller />
         <div className={styles.buildColumn}>
           <WordBuilder isDragging={isDragging} />
+
           {!celebrating && !sessionEnded && closestMatch && (
             <VisualHint match={closestMatch} />
           )}

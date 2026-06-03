@@ -65,10 +65,22 @@ describe('dictionaryService', () => {
       expect(result.position).toMatch(/^(start|end)$/);
     });
 
-    it('throws for a world with no syllables', () => {
-      expect(() => service.getRandomSyllable('granja')).toThrow(
-        'No syllables found for world: granja',
-      );
+    it('returns a syllable for world granja', () => {
+      const result = service.getRandomSyllable('granja');
+      expect(typeof result.syllable).toBe('string');
+      expect(result.syllable.length).toBeGreaterThanOrEqual(2);
+      expect(result.position).toMatch(/^(start|end)$/);
+    });
+  });
+
+  describe('getSyllablesForWorld', () => {
+    it('returns non-empty syllables for selva and granja', () => {
+      expect(service.getSyllablesForWorld('selva').length).toBeGreaterThan(0);
+      expect(service.getSyllablesForWorld('granja').length).toBeGreaterThan(0);
+    });
+
+    it('returns an empty list for worlds without data', () => {
+      expect(service.getSyllablesForWorld('oceano')).toEqual([]);
     });
   });
 

@@ -10,6 +10,7 @@ interface DiceCube3DProps {
   rolling: boolean;
   disabled?: boolean;
   label: string;
+  winnerFaceIndex?: number | null;
   onRoll: () => void;
   rollProfile?: DiceRollProfile | null;
 }
@@ -27,7 +28,11 @@ const FACE_COLORS = [
 const TEXT_COLOR = '#FFFFFF';
 
 /* ─── Canvas texture generator (premium glossy, clean) ─── */
-function createFaceTexture(text: string, bgColor: string): THREE.CanvasTexture {
+function createFaceTexture(
+  text: string,
+  bgColor: string,
+  highlighted = false,
+): THREE.CanvasTexture {
   const size = 512;
   const canvas = document.createElement('canvas');
   canvas.width = size;
@@ -37,6 +42,22 @@ function createFaceTexture(text: string, bgColor: string): THREE.CanvasTexture {
   // Solid color fill
   ctx.fillStyle = bgColor;
   ctx.fillRect(0, 0, size, size);
+
+  if (highlighted) {
+    const winnerGlow = ctx.createRadialGradient(
+      size * 0.5,
+      size * 0.5,
+      size * 0.05,
+      size * 0.5,
+      size * 0.5,
+      size * 0.6,
+    );
+    winnerGlow.addColorStop(0, 'rgba(255,255,255,0.34)');
+    winnerGlow.addColorStop(0.7, 'rgba(255,255,255,0.08)');
+    winnerGlow.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = winnerGlow;
+    ctx.fillRect(0, 0, size, size);
+  }
 
   // Subtle top-to-bottom gradient for depth/dimension
   const depthGrad = ctx.createLinearGradient(0, 0, 0, size);
@@ -80,6 +101,16 @@ function createFaceTexture(text: string, bgColor: string): THREE.CanvasTexture {
   ctx.strokeStyle = 'rgba(255,255,255,0.6)';
   ctx.lineWidth = 2;
   ctx.strokeText(text.toLowerCase(), size / 2, size / 2 + 6);
+
+  if (highlighted) {
+    ctx.strokeStyle = 'rgba(255,248,179,0.9)';
+    ctx.lineWidth = 18;
+    ctx.strokeRect(18, 18, size - 36, size - 36);
+
+    ctx.strokeStyle = 'rgba(255,255,255,0.9)';
+    ctx.lineWidth = 6;
+    ctx.strokeRect(34, 34, size - 68, size - 68);
+  }
 
   const texture = new THREE.CanvasTexture(canvas);
   texture.needsUpdate = true;
@@ -125,6 +156,7 @@ function DiceCube3D({
   rolling,
   disabled = false,
   label,
+  winnerFaceIndex = null,
   onRoll,
   rollProfile,
 }: DiceCube3DProps) {
@@ -210,7 +242,11 @@ function DiceCube3D({
     const faceMap = [2, 3, 4, 5, 0, 1];
     const materials = faceMap.map((ourIdx) =>
       new THREE.MeshPhysicalMaterial({
-        map: createFaceTexture(safeFaces[ourIdx], FACE_COLORS[ourIdx]),
+        map: createFaceTexture(
+          safeFaces[ourIdx],
+          FACE_COLORS[ourIdx],
+          winnerFaceIndex === ourIdx,
+        ),
         roughness: 0.18,
         metalness: 0.05,
         clearcoat: 0.6,
@@ -341,7 +377,7 @@ function DiceCube3D({
         container.removeChild(renderer.domElement);
       }
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [winnerFaceIndex]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /* ─── Mount/unmount ─── */
   useEffect(() => {
@@ -412,10 +448,14 @@ function DiceCube3D({
     faceMap.forEach((ourIdx, threeIdx) => {
       const mat = materials[threeIdx];
       mat.map?.dispose();
-      mat.map = createFaceTexture(safeFaces[ourIdx], FACE_COLORS[ourIdx]);
+      mat.map = createFaceTexture(
+        safeFaces[ourIdx],
+        FACE_COLORS[ourIdx],
+        winnerFaceIndex === ourIdx,
+      );
       mat.needsUpdate = true;
     });
-  }, [faces]);
+  }, [faces, winnerFaceIndex]);
 
   /* ─── Resize handler ─── */
   useEffect(() => {
@@ -446,7 +486,7 @@ function DiceCube3D({
 
   return (
     <div
-      className={`${styles.scene} ${disabled ? styles.disabled : ''}`}
+      className={`${styles.scene} ${disabled ? styles.disabled : ''} ${winnerFaceIndex !== null && !rolling ? styles.winner : ''}`}
       ref={containerRef}
       role="button"
       tabIndex={disabled ? -1 : 0}

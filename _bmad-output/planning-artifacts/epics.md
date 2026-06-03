@@ -601,3 +601,83 @@ So that **sienta que el juego me recuerda y vea cuánto he avanzado**.
 **When** la app intenta cargar perfil y no encuentra datos
 **Then** trata al usuario como jugador nuevo sin mensaje de error (FR21, NFR24)
 **And** muestra AvatarSelectScreen normalmente
+
+## Epic 4: Mejoras Mobile Vertical, Dado Ganador, Validacion Extendida y Mundo Granja
+
+El nino puede jugar en celular vertical sin bloquear la experiencia, identifica claramente la silaba ganadora del dado tras el lanzamiento, recibe validacion mientras arma la palabra dentro del flujo principal, y accede al mundo Granja como segundo nivel jugable.
+
+### Story 4.1: Layout Responsive Vertical sin Overlay de Rotacion
+
+As a **nino**,
+I want **jugar en celular vertical sin que me pidan rotar el dispositivo**,
+So that **pueda usar SILABC de forma natural desde el telefono**.
+
+**Acceptance Criteria:**
+
+**Given** que el dispositivo esta en orientacion portrait
+**When** el nino entra a una pantalla de juego
+**Then** no aparece un overlay bloqueante de rotacion
+**And** la interfaz se adapta con layout vertical usable en mobile
+
+**Given** que el nino esta en GameplayScreen en portrait
+**When** se renderiza la UI
+**Then** el dado aparece en la zona superior
+**And** la zona de construccion queda en la zona media
+**And** el panel de letras queda en la zona inferior
+
+### Story 4.2: Dado con Cara Ganadora Visible y Destacada
+
+As a **nino**,
+I want **ver claramente cual silaba gano en el dado despues del giro**,
+So that **sepa que silaba debo usar para formar la palabra**.
+
+**Acceptance Criteria:**
+
+**Given** que el nino lanza el dado
+**When** termina la animacion
+**Then** la cara ganadora queda orientada hacia arriba y visible
+**And** la silaba ganadora se resalta visualmente con estilo distintivo
+
+**Given** que la silaba se fija en WordBuilder
+**When** inicia la construccion
+**Then** la senal visual del dado mantiene claridad suficiente para confirmar la silaba activa
+
+### Story 4.3: Validacion de Palabras Durante el Armado
+
+As a **nino**,
+I want **recibir validacion mientras armo una palabra con la silaba y las letras disponibles**,
+So that **sepa cuando voy bien sin salir del flujo natural del juego**.
+
+**Acceptance Criteria:**
+
+**Given** que existe una silaba activa
+**When** el nino agrega o remueve letras en WordBuilder
+**Then** el sistema valida la palabra construida dentro del flujo principal
+**And** la palabra evaluada debe contener la silaba obligatoria
+
+**Given** que la palabra construida coincide con una entrada valida del diccionario embebido
+**When** se completa la combinacion correcta
+**Then** se dispara la celebracion y el guardado del progreso
+**And** no aparece una interfaz adicional de escritura manual
+
+### Story 4.4: Habilitar Mundo Granja como Segundo Nivel
+
+As a **nino**,
+I want **entrar al mundo Granja como segundo nivel**,
+So that **descubra nuevas palabras y variedad de juego**.
+
+**Acceptance Criteria:**
+
+**Given** que el nino llega a WorldSelect
+**When** se muestran los mundos
+**Then** Selva y Granja aparecen habilitados para jugar
+
+**Given** que el nino selecciona Granja
+**When** entra al gameplay
+**Then** se aplica tema visual de Granja
+**And** el dado usa silabas y vocabulario definidos para Granja
+
+**Given** que se completa una palabra en Granja
+**When** se guarda progreso
+**Then** queda persistida en el historial del jugador
+**And** el resumen de sesion la muestra correctamente

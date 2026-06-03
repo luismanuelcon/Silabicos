@@ -255,5 +255,83 @@
       { "word": "gato", "difficulty": "easy" },
       { "word": "gala", "difficulty": "easy" }
     ]
+  },
+  {
+    "syllable": "va",
+    "world": "granja",
+    "syllablePosition": "start",
+    "words": [
+      { "word": "vaca", "difficulty": "easy" },
+      { "word": "vaso", "difficulty": "easy" },
+      { "word": "valla", "difficulty": "easy" }
+    ]
+  },
+  {
+    "syllable": "ga",
+    "world": "granja",
+    "syllablePosition": "start",
+    "words": [
+      { "word": "gallo", "difficulty": "easy" },
+      { "word": "gato", "difficulty": "easy" },
+      { "word": "ganado", "difficulty": "easy" }
+    ]
+  },
+  {
+    "syllable": "po",
+    "world": "granja",
+    "syllablePosition": "start",
+    "words": [
+      { "word": "pollo", "difficulty": "easy" },
+      { "word": "potro", "difficulty": "easy" },
+      { "word": "pozo", "difficulty": "easy" }
+    ]
+  },
+  {
+    "syllable": "to",
+    "world": "granja",
+    "syllablePosition": "start",
+    "words": [
+      { "word": "toro", "difficulty": "easy" },
+      { "word": "toma", "difficulty": "easy" },
+      { "word": "tomate", "difficulty": "easy" }
+    ]
+  },
+  {
+    "syllable": "ca",
+    "world": "granja",
+    "syllablePosition": "start",
+    "words": [
+      { "word": "cabra", "difficulty": "easy" },
+      { "word": "campo", "difficulty": "easy" },
+      { "word": "carro", "difficulty": "easy" }
+    ]
+  },
+  {
+    "syllable": "la",
+    "world": "granja",
+    "syllablePosition": "start",
+    "words": [
+      { "word": "lana", "difficulty": "easy" },
+      { "word": "lazo", "difficulty": "easy" },
+      { "word": "lago", "difficulty": "easy" }
+    ]
+  },
+  {
+    "syllable": "va",
+    "world": "granja",
+    "syllablePosition": "end",
+    "words": [
+      { "word": "uva", "difficulty": "easy" },
+      { "word": "nueva", "difficulty": "easy" }
+    ]
+  },
+  {
+    "syllable": "po",
+    "world": "granja",
+    "syllablePosition": "end",
+    "words": [
+      { "word": "sapo", "difficulty": "easy" },
+      { "word": "topo", "difficulty": "easy" }
+    ]
   }
 ]

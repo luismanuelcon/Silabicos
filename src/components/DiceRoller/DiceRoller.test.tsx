@@ -83,5 +83,6 @@ describe('DiceRoller', () => {
     });
 
     expect(screen.getByRole('button', { name: /^Sílaba: [a-z]{2}$/ })).toBeInTheDocument();
+    expect(screen.getByText(/Silaba ganadora:/)).toBeInTheDocument();
   });
 });
