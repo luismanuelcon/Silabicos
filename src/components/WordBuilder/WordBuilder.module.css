@@ -136,6 +136,14 @@
   outline-offset: 2px;
 }
 
+@media (max-width: 767px) and (orientation: portrait) {
+  .builder {
+    width: 100%;
+    max-width: none;
+    justify-content: center;
+  }
+}
+
 /* Responsive */
 @media (max-width: 767px) {
   .builder {

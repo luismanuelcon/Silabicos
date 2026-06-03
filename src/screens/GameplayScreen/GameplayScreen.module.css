@@ -134,6 +134,36 @@
   max-width: 600px;
 }
 
+@media (max-width: 767px) and (orientation: portrait) {
+  .screen {
+    overflow-y: auto;
+  }
+
+  .header {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .worldBadge {
+    font-size: var(--font-size-xs);
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  .gameZone {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: var(--space-md);
+    flex: 0 0 auto;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .buildColumn {
+    width: 100%;
+    max-width: none;
+    gap: var(--space-sm);
+  }
+}
+
 @keyframes floatVine {
   0%, 100% {
     transform: rotate(-3deg);

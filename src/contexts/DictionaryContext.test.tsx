@@ -14,12 +14,13 @@ describe('DictionaryContext', () => {
     }).toThrow('useDictionary must be used within a DictionaryProvider');
   });
 
-  it('provides a service with all 4 methods', () => {
+  it('provides a service with all 5 methods', () => {
     const { result } = renderHook(() => useDictionary(), { wrapper });
 
     expect(typeof result.current.isValidWord).toBe('function');
     expect(typeof result.current.getWordsForSyllable).toBe('function');
     expect(typeof result.current.getClosestMatch).toBe('function');
+    expect(typeof result.current.getSyllablesForWorld).toBe('function');
     expect(typeof result.current.getRandomSyllable).toBe('function');
   });
 

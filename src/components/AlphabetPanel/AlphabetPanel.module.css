@@ -22,6 +22,15 @@
   }
 }
 
+@media (max-width: 767px) and (orientation: portrait) {
+  .panel {
+    max-height: 42dvh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: var(--space-sm) var(--space-md);
+  }
+}
+
 /* Desktop 1024px+: wider gap for 2 rows */
 @media (min-width: 1024px) {
   .panel {

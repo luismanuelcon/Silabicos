@@ -1,5 +1,5 @@
-# generated: 2026-05-11
-# last_updated: 2026-05-11
+# generated: 2026-06-03
+# last_updated: 2026-06-03
 # project: SILABC
 # project_key: NOKEY
 # tracking_system: file-system
@@ -34,8 +34,8 @@
 # - Developer typically creates next story after previous one is 'done' to incorporate learnings
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 
-generated: 2026-05-11
-last_updated: 2026-05-11
+generated: 2026-06-03
+last_updated: 2026-06-03
 project: SILABC
 project_key: NOKEY
 tracking_system: file-system
@@ -67,3 +67,11 @@ development_status:
   3-3-pantalla-de-resumen-de-sesion: done
   3-4-reconocimiento-de-jugador-recurrente-y-welcomescreen: done
   epic-3-retrospective: optional
+
+  # Epic 4: Mejoras UX Mobile, Dado, Validacion y Granja
+  epic-4: done
+  4-1-layout-responsive-vertical-sin-overlay-de-rotacion: done
+  4-2-dado-con-cara-ganadora-visible-y-destacada: done
+  4-3-input-textual-con-validacion-api-y-fallback-local: done
+  4-4-habilitar-mundo-granja-como-segundo-nivel: done
+  epic-4-retrospective: done

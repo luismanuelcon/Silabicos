@@ -47,25 +47,23 @@ describe('WorldSelectScreen', () => {
     expect(selvaCard).not.toHaveAttribute('aria-disabled', 'true');
   });
 
-  it('Granja and Océano are locked', () => {
+  it('only Océano is locked', () => {
     renderScreen();
 
-    const granjaCard = screen.getByRole('button', {
-      name: 'Granja — próximamente',
-    });
+    const granjaCard = screen.getByRole('button', { name: 'Granja' });
     const oceanoCard = screen.getByRole('button', {
       name: 'Océano — próximamente',
     });
 
-    expect(granjaCard).toHaveAttribute('aria-disabled', 'true');
+    expect(granjaCard).not.toHaveAttribute('aria-disabled', 'true');
     expect(oceanoCard).toHaveAttribute('aria-disabled', 'true');
   });
 
-  it('shows "Próximamente" text on locked worlds', () => {
+  it('shows "Próximamente" text only on locked worlds', () => {
     renderScreen();
 
     const comingSoonTexts = screen.getAllByText('Próximamente');
-    expect(comingSoonTexts).toHaveLength(2);
+    expect(comingSoonTexts).toHaveLength(1);
   });
 
   it('selecting Selva triggers navigation', async () => {

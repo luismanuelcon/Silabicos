@@ -19,6 +19,23 @@
   border-radius: 12px;
 }
 
+.winner {
+  box-shadow:
+    0 0 0 4px rgba(255, 235, 59, 0.28),
+    0 0 28px rgba(255, 235, 59, 0.42),
+    0 0 52px rgba(255, 167, 38, 0.3);
+  animation: winnerPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes winnerPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.015);
+  }
+}
+
 .disabled {
   opacity: 0.55;
   cursor: not-allowed;
@@ -29,5 +46,11 @@
   .scene {
     width: 240px;
     height: 240px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .winner {
+    animation: none;
   }
 }
